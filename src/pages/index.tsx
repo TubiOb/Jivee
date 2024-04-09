@@ -1,0 +1,1 @@
+export { default as Jivee } from './landingPage/index'
