@@ -4,7 +4,7 @@ import { ForgotPassword, SignIn, SignUp } from './modules'
 
 const router = createBrowserRouter ([
     {
-        path: '',
+        path: '/',
         element: <Jivee />,
     },
     {
@@ -14,6 +14,14 @@ const router = createBrowserRouter ([
                 path: 'signup',
                 element: <SignUp />,
             },
+            // {
+            //     path: 'register-phoneNumber',
+            //     element: <RegisterNumber  />,
+            // },
+            // {
+            //     path: 'get-started',
+            //     element: <GetStarted />,
+            // },
             {
                 path: 'signin',
                 element: <SignIn />,

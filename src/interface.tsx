@@ -14,6 +14,32 @@ export interface DefaultbuttonProps extends CBProps {
     className?: string;
     leftIcon?: any;
     rightIcon?: any;
+    setupStep?: any;
+    setSetupStep?: any;
+}
+
+export interface InputProps {
+    name: string;
+    placeholder?: string;
+    value: string;
+    color?: string | undefined;
+    type?: string;
+    error?: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onBlur: (e: React.SyntheticEvent) => void;
+    onFocus?: () => void;
+    isDisabled?: boolean;
+    width?: string;
+    height? : string;
+    fontWeight?: string;
+    errorColor?: string;
+    fontSize?: string;
+    bgColor?: string;
+    borderWidth?: string | number;
+    borderColor?: string;
+    shadow?: string;
+    touched?: boolean;
+    focusBorderColor?: string;
 }
 
 export interface ToastProps {
