@@ -40,6 +40,7 @@ export interface InputProps {
     shadow?: string;
     touched?: boolean;
     focusBorderColor?: string;
+    maxLength?: number;
 }
 
 export interface ToastProps {

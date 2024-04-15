@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import RegisterNumber from '../register-phoneNumber/index';
-import { GetStarted } from '../..';
+import { RegisterNumber, GetStarted, VerifyNumber } from '../..';
 
 const index = () => {
 
@@ -19,6 +18,13 @@ const index = () => {
         )}
         {setupStep === 2 && (
             <RegisterNumber
+                details={details}
+                setupStep={setupStep}
+                setDetails={setDetails}
+                setSetupStep={setSetupStep} />
+        )}
+        {setupStep === 3 && (
+            <VerifyNumber
                 details={details}
                 setupStep={setupStep}
                 setDetails={setDetails}

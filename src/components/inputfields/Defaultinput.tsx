@@ -7,7 +7,7 @@ import { MdEmojiEmotions } from "react-icons/md";
 import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text } from '@chakra-ui/react';
 
 const Defaultinput = (props: InputProps) => {
-    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder} = props;
+    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, maxLength } = props;
 
     const isPassword = type === 'password'; 
   
@@ -37,6 +37,8 @@ const Defaultinput = (props: InputProps) => {
                 placeholder={placeholder}
                 fontWeight={fontWeight}
                 focusBorderColor={focusBorderColor}
+                maxLength={maxLength}
+                className='flex items-center focus-within:bg-white text-base'
             />
             {isPassword && (
                 <InputRightElement>
