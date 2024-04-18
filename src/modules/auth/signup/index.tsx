@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RegisterNumber, GetStarted, VerifyNumber } from '../..';
+import { RegisterNumber, GetStarted, VerifyNumber, ProfileSetup } from '../..';
 
 const index = () => {
 
@@ -25,6 +25,13 @@ const index = () => {
         )}
         {setupStep === 3 && (
             <VerifyNumber
+                details={details}
+                setupStep={setupStep}
+                setDetails={setDetails}
+                setSetupStep={setSetupStep} />
+        )}
+        {setupStep === 4 && (
+            <ProfileSetup
                 details={details}
                 setupStep={setupStep}
                 setDetails={setDetails}

@@ -7,7 +7,7 @@ import { MdEmojiEmotions } from "react-icons/md";
 import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text } from '@chakra-ui/react';
 
 const Defaultinput = (props: InputProps) => {
-    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, maxLength } = props;
+    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, maxLength, className } = props;
 
     const isPassword = type === 'password'; 
   
@@ -21,13 +21,14 @@ const Defaultinput = (props: InputProps) => {
 
   return (
     <Flex className='flex flex-col gap-1 overflow-hidden p-2' w={width}>
-        <InputGroup>
+        <InputGroup alignItems='center' display='flex'>
             <ChakraInput
                 name={name}
                 value={value}
                 onChange={onChange}
                 onFocus={onFocus}
                 color={color}
+                className={className}
                 bgColor={bgColor}
                 onBlur={onBlur}
                 height={height}
@@ -38,7 +39,7 @@ const Defaultinput = (props: InputProps) => {
                 fontWeight={fontWeight}
                 focusBorderColor={focusBorderColor}
                 maxLength={maxLength}
-                className='flex items-center focus-within:bg-white text-base'
+                outline='none'
             />
             {isPassword && (
                 <InputRightElement>
@@ -61,8 +62,8 @@ const Defaultinput = (props: InputProps) => {
             {showTextIcons && (
                     <InputRightElement>
                         <IconButton
-                            aria-label='attach'
-                            icon={<TfiClip />} 
+                            aria-label='emoticon'
+                            icon={<MdEmojiEmotions />} 
                             // onClick={}
                             variant="ghost"
                             color="gray.500"
@@ -109,13 +110,13 @@ const Defaultinput = (props: InputProps) => {
                 </InputRightElement>
             )}
             {type === 'search' && ( 
-                <InputLeftElement  border='0' mt='5px'>
+                <InputLeftElement border='0' p={0} m={0}>
                     <IconButton
                     aria-label='Search'
                     icon={<CiSearch />} 
                     // onClick={}
                     variant="ghost"
-                    color="gray.500"
+                    color="gray.900"
                     border='0px'
                     _hover={
                     { border: '0px',}

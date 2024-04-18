@@ -35,6 +35,7 @@ export interface InputProps {
     errorColor?: string;
     fontSize?: string;
     bgColor?: string;
+    className?: string;
     borderWidth?: string | number;
     borderColor?: string;
     shadow?: string;
