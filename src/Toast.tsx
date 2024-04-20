@@ -2,7 +2,7 @@ import { Toaster } from 'sonner'
 import '../index.css'
 // import { ToastProps } from './interface'
 
-const Toast = ( showToast: any ) => {
+const Toast = ( _showToast: any ) => {
 
   return (
     <div>

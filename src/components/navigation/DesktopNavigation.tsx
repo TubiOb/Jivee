@@ -41,7 +41,7 @@ const DesktopNavigation = ({ tabs, selectedTabIndex, setSelectedTab }: Props): J
                 {toggle ? <BiMenuAltLeft /> : <BiMenu />}
             </motion.div>
             
-            <motion.div ref={navRef} transition={{ type: 'spring', ease: 'easeInOut', duration: 0.40 }} className={`rounded-xl shadow-2xl bg-white block py-4 gap-2 ${toggle ? 'h-full block' : 'h-0 hidden'}`} onPointerLeave={(e) => setHoveredTabIndex(null)}>
+            <motion.div ref={navRef} transition={{ type: 'spring', ease: 'easeInOut', duration: 0.40 }} className={`rounded-xl shadow-2xl bg-white block py-4 gap-2 ${toggle ? 'h-full block' : 'h-0 hidden'}`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
                 {/* Add your sidebar content here */}
                 {/* You can use conditional rendering to show/hide sidebar items */}
                 {tabs.map((item, i) => {

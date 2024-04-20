@@ -13,20 +13,21 @@ interface SetupStepPropsType {
 
 const index = ({
     details,
-    setupStep,
-    setDetails,
-    setSetupStep,
+    // setupStep,
+    // setDetails,
+    // setSetupStep,
   }: SetupStepPropsType) => {
     const navigate = useNavigate();
 
-    const [userImage, setUserImage] = useState('');
-    const [imageFile, setImageFile] = useState(null);
+    
+    const [/* userImage */, setUserImage] = useState('');
+    const [/* imageFile */, setImageFile] = useState(null);
 
     const handleBlur = () => {
     // Do something when the input field loses focus
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (_e: React.ChangeEvent<HTMLInputElement>) => {
     // Do something when the input value changes
     };
 

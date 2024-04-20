@@ -1,7 +1,7 @@
 import { Jivee } from '../../../components';
 import Chat from '../../../assets/Group Chat-bro.svg' 
 import Defaultbutton from '../../../components/buttons/Defaultbutton'
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
@@ -11,9 +11,9 @@ interface SetupStepPropsType {
 }
 
 const index = ({
-    details,
+    // details,
     setupStep,
-    setDetails,
+    // setDetails,
     setSetupStep,
   }: SetupStepPropsType) => {
 
