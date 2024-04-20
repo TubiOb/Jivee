@@ -2,7 +2,7 @@
 
 const index = () => {
   return (
-    <div>
+    <div className="w-full h-full bg-white rounded-xl">
         HERE WE ARE
     </div>
   )

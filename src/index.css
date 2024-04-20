@@ -19,3 +19,47 @@ body {
 .jivee {
     font-family: 'Montserrat';
 }
+
+
+/* Define the scrollbar styles for WebKit browsers (Chrome, Safari) */
+.trick::-webkit-scrollbar {
+  width: 12px;
+}
+
+.trick::-webkit-scrollbar-thumb {
+  background-color: #DBD8E3; /* Color of the thumb */
+  border-radius: 8px;
+}
+
+.trick::-webkit-scrollbar-track {
+  background-color: #DBD8E3; /* Color of the track */
+}
+
+/* Define the scrollbar styles for Firefox */
+.trick {
+  scrollbar-width: thin;
+  scrollbar-color: #5C5470 #ffffff; /* thumb and track color */
+}
+
+.trick:hover {
+  scrollbar-color: #5C5470 #ffffff; /* change colors on hover */
+}
+
+
+
+/* DARK MODE SCROLLBAR STYLES */
+.dark .trick::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Color of the thumb in dark mode */
+}
+
+.dark .trick::-webkit-scrollbar-track {
+  background-color: #ffffff; /* Color of the track in dark mode */
+}
+
+.dark .trick {
+  scrollbar-color: #6b9080 #ffffff; /* thumb and track color in dark mode */
+}
+
+.dark .trick:hover {
+  scrollbar-color: #6b9080 #ffffff; /* change colors on hover in dark mode */
+}

@@ -4,6 +4,7 @@ import { DefaultInput, Jivee } from "../../components"
 import { useTabs } from "../../hooks/use-tabs";
 import { Framer } from "../../components/framer/framer";
 import { GroupInbox, PersonalInbox } from "..";
+import { BiSolidMessageSquareAdd } from "react-icons/bi";
 
 
 
@@ -35,7 +36,7 @@ const index = () => {
     <div className="flex flex-col rounded-xl w-full lg:w-[40%] shadow-xl h-full py-2 px-3 items-center justify-start">
         <Jivee />
         <DefaultInput height='34px' name='search' value={searchValue} type='search' color="purple.500" shadow='md' onBlur={handleBlur} bgColor='purple.100' width='80%' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white sticky text-base' />
-        <div className="flex-1 w-full overflow-hidden rounded-xl gap-2 p-1">
+        <div className="flex-1 w-full overflow-hidden rounded-xl relative gap-2 p-1">
             {/* <div className="items-center w-full h-12 grid grid-cols-2 overflow-hidden shadow-lg rounded-lg px-1 transition">
                 {tabs.map((tab) => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`relative block h-10 px-2 font-medium transition rounded-lg ${activeTab === tab.id ? 'text-white' : 'hover:opacity-75 text-purple-500'}`}>
@@ -47,9 +48,15 @@ const index = () => {
                 ))}
                 
             </div> */}
+            <button className='flex absolute right-[7%] bottom-[3%] items-center z-20 justify-between cursor-pointer px-2 py-2 group rounded-xl shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
+                <BiSolidMessageSquareAdd size={20} /> 
+            </button>
             <Framer.Tabs {...framer.tabProps} />
 
-            <div className="h-full rounded-xl py-2 px-2.5 overflow-auto">{framer.setSelectedTab.children}</div>
+            <div className="trick h-full rounded-xl py-2 px-1.5 mt-2 overflow-auto">
+                
+                {framer.setSelectedTab.children}
+            </div>
 
             {/* <div className="flex bg-red-700 w-full">
                 <motion.div layoutId='chat-category' className='h-full w-full bg-green-600'>

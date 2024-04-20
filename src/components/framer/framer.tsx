@@ -33,12 +33,12 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
 
 
     return (
-        <div ref={tabRef} className='flex flex-shrink-0 items-center justify-center relative z-0 h-12 overflow-hidden shadow-lg bg-purple-400/50 rounded-xl py-2 px-1' onPointerLeave={(e) => setHoveredTabIndex(null)}>
+        <div ref={tabRef} className='flex flex-shrink-0 items-center justify-center relative z-0 h-12 overflow-hidden shadow-lg bg-purple-400/50 rounded-xl py-2 px-1' onPointerLeave={(_e) => setHoveredTabIndex(null)}>
             {tabs.map((item, i) => {
                 const isActive = hoveredTabIndex === i || selectedTabIndex === i;
 
                 return (
-                    <motion.button key={i} className={classNames('flex items-center justify-center w-full h-10 px-2 z-20 font-medium rounded-xl cursor-pointer select-none hover:bg-transparent', { 'text-purple-500': !isActive, 'text-white hover:text-white': isActive, },)} ref={(el) => (buttonRefs[i] = el)} onPointerEnter={() => {setHoveredTabIndex(i)}} onFocus={() => {setHoveredTabIndex(i)}} onClick={() => {setSelectedTab([i, i > selectedTabIndex ? i : -1])}} >
+                    <motion.button key={i} className={classNames('flex items-center justify-center w-full h-10 px-2 z-20 font-medium rounded-xl sticky outline-none cursor-pointer select-none hover:bg-transparent', { 'text-purple-500': !isActive, 'text-white hover:text-white': isActive, },)} ref={(el) => (buttonRefs[i] = el)} onPointerEnter={() => {setHoveredTabIndex(i)}} onFocus={() => {setHoveredTabIndex(i)}} onClick={() => {setSelectedTab([i, i > selectedTabIndex ? i : -1])}} >
                         {item.label}
                     </motion.button>
                 )
