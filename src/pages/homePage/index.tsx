@@ -26,7 +26,7 @@ const index = () => {
   const framer = navTabs(hookProps);
 
   return (
-    <div className="w-full flex flex-col lg:flex-row items-start h-screen bg-transparent md:bg-purple-700/80 overflow-hidden md:py-3 md:px-2 gap-0 md:gap-2">
+    <div className="w-full flex flex-col fixed lg:flex-row items-start h-screen bg-transparent md:bg-purple-700/80 md:py-3 md:px-2 gap-0 md:gap-2">
         <Framer.Tabs {...framer.tabProps} />
         <div className="flex flex-1 h-[90%] md:h-full w-full md:rounded-xl shadow-none md:shadow-xl sticky flex-col lg:flex-row items-center bg-white p-1 gap-4">
             {framer.setSelectedTab.children}
