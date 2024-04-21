@@ -34,19 +34,16 @@ const index = () => {
     };
 
   return (
-    <div className="flex flex-col rounded-xl w-full md:h-full lg:w-[40%] shadow-xl py-2 px-3 items-center justify-start">
+    <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] shadow-xl py-2 px-3 items-center justify-start">
         <Jivee />
         <DefaultInput height='34px' name='search' value={searchValue} type='search' color="purple.500" shadow='md' onBlur={handleBlur} bgColor='purple.100' width='80%' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white fixed text-base' />
-        <Box className="w-full rounded-xl overflow-hidden relative gap-2 p-1">
-            
-            {/* <button className='flex absolute right-[7%] bottom-[3%] items-center z-20 justify-between cursor-pointer px-2 py-2 group rounded-xl shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
-                <BiSolidMessageSquareAdd size={20} /> 
-            </button> */}
+        <Box className="w-full rounded-xl overflow-hidden gap-2 p-1">
             <Framer.Tabs {...framer.tabProps} />
-
-            <Box className="trick rounded-xl py-2 px-1.5 overflow-auto" maxHeight={["calc(88vh - 80px)", 'calc(80vh - 80px)']}>
-                
+            <Box className="trick rounded-none md:rounded-xl py-2 px-1.5 h-full overflow-auto">
                 {framer.setSelectedTab.children}
+                <button className='flex fixed right-[7%] md:right-[58%] bottom-[3%] md:bottom-[6%] items-center z-20 cursor-pointer px-2 py-2 group rounded-xl shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
+                    <BiSolidMessageSquareAdd size={20} /> 
+                </button>
             </Box>
         </Box>
     </div>

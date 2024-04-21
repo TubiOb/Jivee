@@ -37,9 +37,7 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
     return (
         <div className="hidden md:flex h-full justify-center">
             <div className={`rounded-xl text-purple-700/80 w-14 items-center justify-center flex-shrink-0 flex flex-col shadow-xl h-full transition-all duration-500 ease-in-out`}>
-                {/* <motion.div transition={{ type: 'tween', ease: 'easeInOut' }} className={`text-2xl w-14 cursor-pointer outline-none bg-white rounded-xl p-4 ${toggle ? 'shadow-xl' : 'shadow-xl'}`} onClick={() => setToggle(!toggle)}>
-                    {toggle ? <BiMenuAltLeft /> : <BiMenu />}
-                </motion.div> */}
+               
                 
                 <motion.div ref={navRef} transition={{ type: 'spring', ease: 'easeInOut', duration: 0.40 }} className={`rounded-xl shadow-2xl flex flex-col bg-white items-center justify-start py-4 px-1 gap-4 h-full w-14`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
                     {/* Add your sidebar content here */}
