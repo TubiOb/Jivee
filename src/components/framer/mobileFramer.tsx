@@ -33,10 +33,10 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
 
 
     return (
-        <div className="md:hidden flex justify-center w-[96%] mx-auto h-[9%] flex-1 flex-shrink-0">
-            <div className={` text-purple-700/80 w-full bottom-0 left-0 sticky rounded-xl h-full items-center flex-shrink-0 flex transition-all duration-500 ease-in-out`}>
+        <div className="md:hidden flex flex-1 justify-center w-[96%] mx-auto flex-shrink-0">
+            <div className={` text-purple-700/80 w-full bottom-0 left-0 fixed rounded-xl items-center flex-shrink-0 flex transition-all duration-500 ease-in-out`}>
                 
-                <div ref={navRef} className={` shadow-2xl flex flex-row bg-white items-center rounded-xl justify-center overflow-hidden h-full py-4 px-1 gap-2 w-full `} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
+                <div ref={navRef} className={` shadow-2xl flex flex-row bg-white items-center rounded-xl justify-center overflow-hidden py-2 px-1 gap-2 w-full `} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
                     {/* Add your sidebar content here */}
                     {/* You can use conditional rendering to show/hide sidebar items */}
                     {tabs.map((item, i) => {
