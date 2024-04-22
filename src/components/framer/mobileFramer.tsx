@@ -38,14 +38,14 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
 
     return (
         <div className="md:hidden flex justify-center">
-            <div className={`text-2xl text-purple-700/80 cursor-pointer absolute top-2 left-2 flex items-center justify-center outline-none bg-white rounded-xl p-2 shadow-xl`} onClick={() => setToggle(!toggle)}>
+            <div className={`text-2xl text-purple-700/80 cursor-pointer absolute top-2 left-2 flex items-center justify-center outline-none bg-white rounded-xl p-1 shadow-xl`} onClick={() => setToggle(!toggle)}>
                 <BiMenu />
             </div>
             {/* <div className={` text-purple-700/80 bottom-0 top-0 h-full left-0 fixed items-center flex-shrink-0 flex transition-all duration-500 ease-in-out`}> */}
                 
                 
-                <motion.div transition={{ type: 'tween', ease: 'easeInOut', duration: 0.4 }} ref={navRef} className={`shadow-2xl flex flex-col bottom-0 top-0 h-full bg-white items-center fixed justify-start overflow-hidden py-4 px-1 gap-2 z-10 w-[60%] left-0 ${toggle ? 'left-0 ' : 'left-[-100%]'}`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
-                    <div className={`text-2xl text-purple-700/80 cursor-pointer absolute bottom-3 right-2 flex items-center justify-center outline-none bg-white rounded-xl p-2 shadow-xl`} onClick={() => setToggle(!toggle)}>
+                <motion.div transition={{ type: 'tween', ease: 'easeInOut', duration: 2.5 }} ref={navRef} className={`shadow-2xl flex flex-col bottom-0 top-0 h-full bg-white items-center fixed justify-start overflow-hidden py-4 px-1 gap-2 z-10 w-[60%] left-0 ${toggle ? 'left-0 ' : 'left-[-100%]'}`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
+                    <div className={`text-2xl text-purple-700/80 cursor-pointer absolute bottom-3 right-2 flex items-center justify-center outline-none bg-white rounded-xl p-1 shadow-xl`} onClick={() => setToggle(!toggle)}>
                         <MdKeyboardArrowLeft />
                     </div>
                     {/* Add your sidebar content here */}
