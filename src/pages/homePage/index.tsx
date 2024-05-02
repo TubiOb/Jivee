@@ -1,8 +1,10 @@
 import { Inbox } from "../../layouts"
 import '../../index.css'
 
-import { RiUserSettingsLine } from "react-icons/ri";
+import { RiUserSettingsLine, RiUser3Line } from "react-icons/ri";
 import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
+import { HiLogout } from "react-icons/hi";
+import { MdOutlinePeopleAlt } from "react-icons/md";
 
 import { Framer } from "../../components/framer/navFramer"
 import { mobFramer } from "../../components/framer/mobileFramer";
@@ -15,10 +17,10 @@ const index = () => {
   const [hookProps] = useState({
     tabs: [
       { id: 'chats', icon: <HiOutlineChatBubbleBottomCenterText size={18} />, label: 'Chats', children: <Inbox /> },
+      { id: 'contacts', icon: <MdOutlinePeopleAlt size={18} />, label: 'Contacts', children: <Settings /> },
       { id: 'settings', icon: <RiUserSettingsLine size={18} />, label: 'Settings', children: <Settings /> },
-      { id: 'chatss', icon: <HiOutlineChatBubbleBottomCenterText size={18} />, label: 'Chatss', children: <Inbox /> },
-      { id: 'settingss', icon: <RiUserSettingsLine size={18} />, label: 'Settingss', children: <Settings /> },
-      { id: 'chatsss', icon: <HiOutlineChatBubbleBottomCenterText size={18} />, label: 'Chatsss', children: <Inbox /> },
+      { id: 'profile', icon: <RiUser3Line size={18} />, label: 'Profile', children: <Inbox /> },
+      { id: 'logout', icon: <HiLogout size={18} />, label: 'Logout', children: <Inbox /> },
     ],
     initialTabId: 'Matches',
   });
