@@ -4,20 +4,43 @@ import { CiSearch } from "react-icons/ci";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { TfiClip } from "react-icons/tfi";
 import { MdEmojiEmotions } from "react-icons/md";
-import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text } from '@chakra-ui/react';
+import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text, Box } from '@chakra-ui/react';
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 
 const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) => {
     const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, className, showAttachIcon } = props;
 
     const isPassword = type === 'password'; 
   
-    const [showPassword, setShowPassword] = useState(false); 
+    const [showPassword, setShowPassword] = useState(false);
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
     const showTextIcons = type === 'text' && !showAttachIcon;
+
+    const handleEmojiSelect = (emoji: { native: string; }) => {
+        if (onChange) {
+            const inputEvent = new CustomEvent('input', { bubbles: true, detail: { name, value: value + emoji.native } });
+            const target = {
+                name,
+                value: value + emoji.native,
+            };
+            Object.defineProperty(inputEvent, 'target', { value: target });
+            Object.defineProperty(inputEvent, 'currentTarget', { value: target });
+            onChange(inputEvent as any);
+        }
+        setShowEmojiPicker(false);
+    };
+
+
+    const handleEmojiPickerToggle = () => {
+        setShowEmojiPicker(!showEmojiPicker);
+    };
+    
 
   return (
     <Flex className='flex flex-col gap-1 overflow-hidden p-2' w={width}>
@@ -66,7 +89,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                             aria-label='emoticon'
                             icon={<MdEmojiEmotions />}
                             cursor='pointer'
-                            // onClick={}
+                            onClick={handleEmojiPickerToggle}
                             variant="ghost"
                             color="gray.500"
                             border='0px'
@@ -146,6 +169,11 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
             <Text color={errorColor} fontSize='small'>
                 {error}
             </Text>
+        )}
+        {showEmojiPicker && (
+            <Box position='absolute' zIndex='1000'>
+                <Picker data={data} onSelect={handleEmojiSelect} />
+            </Box>
         )}
     </Flex>
   )

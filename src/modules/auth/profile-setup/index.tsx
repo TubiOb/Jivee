@@ -123,7 +123,7 @@ const index = ({
                     </label>
                 </div>
                 <div className="block mt-6">
-                    <DefaultInput height='44px' name='username' showAttachIcon={false} value={details.username} type='text' shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
+                    <DefaultInput height='44px' name='username' value={details.username} type='text' shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
                     <Defaultbutton type='submit' bg='purple.400' width={['100%', '100%', '100%', '100%']} mx='auto' cursor='pointer' color="white" shadow='lg' fontSize={['14px', '15px', '15px']} onClick={handleSave} className='mt-9' >{'Finish'}</Defaultbutton>
                 </div>
                 
