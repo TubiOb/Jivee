@@ -27,13 +27,13 @@ const index = () => {
     
 
   return (
-    <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] md:shadow-xl py-2 px-3 items-center justify-start">
+    <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] xl:w-[30%] md:shadow-xl py-2 px-3 gap-3 items-center justify-start">
         <Jivee />
-        <div className="w-full rounded-xl overflow-hidden gap-2 p-1">
+        <div className="w-full rounded-xl overflow-hidden flex flex-col gap-2 p-2 h-screen lg:h-full">
             <Framer.Tabs {...framer.tabProps} />
-            <Box className="trick rounded-none md:rounded-xl py-2 px-1.5 h-full">
+            <Box className="relative rounded-none md:rounded-xl py-2 px-1.5 h-full">
                 {framer.setSelectedTab.children}
-                <button className='flex fixed right-[7%] md:right-[58%] xl:right-[60%] bottom-[7%] md:bottom-[6%] items-center z-20 cursor-pointer px-2 py-2 group rounded-xl md:shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
+                <button className='flex sticky right-[3%] ml-auto bottom-[2%] md:bottom-[2%] xl:bottom-[5%] items-center z-20 cursor-pointer px-2 py-2 group rounded-xl md:shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
                     <BiSolidMessageSquareAdd size={20} /> 
                 </button>
             </Box>
@@ -50,7 +50,7 @@ export default index
 
 
 
-
+// md:right-[58%] xl:right-[60%]
 {/* <div className="items-center w-full h-12 grid grid-cols-2 overflow-hidden shadow-lg rounded-lg px-1 transition">
                 {tabs.map((tab) => (
                     <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`relative block h-10 px-2 font-medium transition rounded-lg ${activeTab === tab.id ? 'text-white' : 'hover:opacity-75 text-purple-500'}`}>

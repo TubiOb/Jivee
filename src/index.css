@@ -39,6 +39,8 @@ body {
 .trick {
   scrollbar-width: thin;
   scrollbar-color: #5C5470 #ffffff; /* thumb and track color */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .trick:hover {

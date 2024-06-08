@@ -1,13 +1,35 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CiEdit } from "react-icons/ci";
 import { MdSaveAs } from "react-icons/md";
 import { VscEdit } from "react-icons/vsc";
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { firestore, auth, storage } from '../../firebase';
-import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
+import { auth, storage, database } from '../../firebase';
+import { getDownloadURL, uploadBytes, ref as storageRef } from 'firebase/storage';
 import { onAuthStateChanged } from 'firebase/auth';
 import { toast } from 'sonner'
 import Toast from '../../Toast';
+import { onValue, ref, set } from 'firebase/database';
+
+
+const useUserData = (userId: any) => {
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const useRef = ref(database, `users/${userId}`);
+
+        const unsubscribe = onValue(useRef, (snapshot) => {
+            const data = snapshot.val();
+            setUserData(data);
+            setLoading(false);
+        }, {
+            onlyOnce: true
+        });
+        return () => unsubscribe();
+    }, [userId]);
+
+    return { userData, loading };
+}
+
 
 const index = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -21,6 +43,7 @@ const index = () => {
     const [bio, setBio] = useState('');
     const [username, setUsername] = useState('');
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const { userData, loading } = useUserData(currentUserId);
 
 
         //   FETCHING USER'S PROFILE IMAGE
@@ -28,7 +51,7 @@ const index = () => {
     const fetchUserImage = async () => {
         try {
             if (userImage) {
-                const imageURL = await getDownloadURL(ref(storage, userImage));
+                const imageURL = await getDownloadURL(storageRef(storage, userImage));
                 return imageURL;
             } else {
                 return null;
@@ -48,34 +71,7 @@ const index = () => {
             if (user) {
                 const userUID = user.uid;
                 setCurrentUserId(userUID);
-                const userDocRef = doc(firestore, 'User', userUID);
-                try {
-                    const userData = await getDoc(userDocRef);
-
-                    if (userData.exists()) {
-                        const userInfo = userData.data();
-
-                        if (userInfo) {
-                            const loggedUser = userInfo.username;
-                            const usersMail = userInfo.email;
-                            setCurrentUser(loggedUser);
-                            setUserEmail(usersMail);
-
-                            if (userInfo.fullName) setFullName(userInfo.fullName);
-                            if (userInfo.phoneNumber) setPhoneNumber(userInfo.phoneNumber);
-                            if (userInfo.bio) setBio(userInfo.bio);
-                            if (userInfo.username) setUsername(userInfo.username);
-                            if (userInfo.userImage) {
-                                const imageURL = await getDownloadURL(ref(storage, userInfo.userImage));
-                                setUserImage(imageURL);
-                            }
-                        }
-                    }
-                }
-                catch (err) {
-                    showToastMessage('No user found', 'error');
-                }
-                
+                console.log(currentUserId);
             }
             else {
                 setCurrentUser('')
@@ -88,7 +84,34 @@ const index = () => {
             }
         });
         return () => loggedInUser();
-    }, [currentUserId]);
+    }, []);
+
+
+
+
+
+    useEffect(() => {
+        const updateUserProfile = async () => {
+            if (!loading && currentUserId && userData) {
+                const { username, email, phoneNumber, userImage, fullName = '', bio = '' } = userData;
+                setCurrentUser(username);
+                setUserEmail(email);
+                setFullName(fullName);
+                setPhoneNumber(phoneNumber);
+                setBio(bio);
+                setUsername(username);
+                if (userImage) {
+                    const imageURL = await getDownloadURL(storageRef(storage, userImage));
+                    setUserImage(imageURL);
+                }
+            }
+            else if (!loading && currentUserId && !userData) {
+                showToastMessage('User not found', 'error');
+            }
+        };
+
+        updateUserProfile();
+    }, [loading, currentUserId, userData]);
 
 
 
@@ -97,30 +120,16 @@ const index = () => {
 
 
     const updateUserInfo = async () => {
-        const userDocRef = doc(firestore, 'User', currentUserId);
+        const userDocRef = ref(database, `users/${currentUserId}`);
         try {
-            const docData = await getDoc(userDocRef);
-
-            if (docData.exists()) {
-                await updateDoc(userDocRef, {
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    bio: bio,
-                    username: username,
-                });
-
-                showToastMessage('Profile updated', 'success');
-            }
-            else {
-                await setDoc(userDocRef, {
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    bio: bio,
-                });
-
-                showToastMessage('Profile updated', 'success');
-            }
-
+            const updates = {
+                fullName,
+                phoneNumber,
+                bio,
+                username,
+            };
+            await set(userDocRef, updates);
+            showToastMessage('Profile updated', 'success');
             setIsEditing(false);
             setIsEditingBio(false);
         }
@@ -135,35 +144,34 @@ const index = () => {
 
 
     const updateUserImage = async () => {
-        const storageRef = ref(storage, `User/${currentUserId}/${userImage}`);
+        const storagedRef = storageRef(storage, `User/${currentUserId}/${userImage}`);
 
         try {
             if (imageFile) {
-                await uploadBytes(storageRef, imageFile);
-
-                const imageURL = await getDownloadURL(storageRef);
-
+                await uploadBytes(storagedRef, imageFile);
+                const imageURL = await getDownloadURL(storagedRef);
                 console.log("Image URL:", imageURL);
 
-                const userDocRef = doc(firestore, 'User', currentUserId);
-                await updateDoc(userDocRef, {
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    bio: bio,
-                    username: username,
+                const userDocRef = ref(database, `users/${currentUserId}`);
+                const updates = {
+                    fullName,
+                    phoneNumber,
+                    bio,
+                    username,
                     userImage: imageURL,
-                });
+                };
+                await set(userDocRef, updates)
             }
             else {
-                const userDocRef = doc(firestore, 'User', currentUserId);
-                await updateDoc(userDocRef, {
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    bio: bio,
-                    username: username
-                });
+                const userDocRef = ref(database, `users/${currentUserId}`);
+                const updates = {
+                    fullName,
+                    phoneNumber,
+                    bio,
+                    username,
+                };
+                await set(userDocRef, updates);
             }
-
             showToastMessage('Profile image updated', 'success');
         }
         catch (err) {
@@ -222,7 +230,7 @@ const index = () => {
                 <div className='w-full lg:w-[25%] items-center justify-center flex p-1 relative'>
                     <img src={userImage} alt={currentUser} className='rounded-full w-16 h-16 lg:w-24 lg:h-24 object-cover ring-2 ring-white dark:ring-neutral-500/80' />
                     
-                    <label htmlFor="upload" className="cursor-pointer absolute px-1 py-1 text-sm lg:text-base -top-0 lg:-top-0 rounded-lg dark:bg-white bg-neutral-700 z-50 shadow-sm right-24 lg:right-16 2xl:right-28">
+                    <label htmlFor="upload" className="cursor-pointer absolute px-1 py-1 text-sm lg:text-base -top-0 lg:-top-0 rounded-lg dark:bg-white bg-neutral-700 z-50 shadow-sm right-24 lg:right-7 xl:right-16 2xl:right-28">
                         <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="upload" />
                         <VscEdit />
                     </label>
@@ -263,7 +271,7 @@ const index = () => {
                     <div>
                         <h4 className='text-sm lg:text-sm text-neutral-300 dark:text-neutral-600 font-medium'>Full Name</h4>
                         { isEditing ? (
-                            <input type='text' value={fullName} onChange={(e) => setFullName(e.target.value)} className=" border-none bg-blue-50 w-full focus:bg-blue-100 py-2 md:py-1.5 lg:py-1 xl:py-1 px-2 xl:px-3.5 text-sm md:text-sm lg:text-sm font-normal focus:border-blue-900 focus:outline-none rounded-lg focus:ring-1" />
+                            <input type='text' value={fullName || ''} onChange={(e) => setFullName(e.target.value)} className=" border-none bg-blue-50 w-full focus:bg-blue-100 py-2 md:py-1.5 lg:py-1 xl:py-1 px-2 xl:px-3.5 text-sm md:text-sm lg:text-sm font-normal focus:border-blue-900 focus:outline-none rounded-lg focus:ring-1" />
                         ) : (
                             <p className='text-sm lg:text-sm'>{fullName}</p>
                         )}
@@ -301,7 +309,7 @@ const index = () => {
                 
                 <div className='flex w-full h-auto items-center'>
                     { isEditingBio ? (
-                        <textarea value={bio} onChange={(e) => setBio(e.target.value)} className='border-none bg-blue-50 w-full min-h-40 resize-none focus:bg-blue-100 py-2 md:py-1.5 lg:py-1 xl:py-1 px-2 xl:px-3.5 text-sm md:text-sm lg:text-sm font-normal focus:border-blue-900 focus:outline-none rounded-lg focus:ring-1'></textarea>
+                        <textarea value={bio || ''} onChange={(e) => setBio(e.target.value)} className='border-none bg-blue-50 w-full min-h-40 resize-none focus:bg-blue-100 py-2 md:py-1.5 lg:py-1 xl:py-1 px-2 xl:px-3.5 text-sm md:text-sm lg:text-sm font-normal focus:border-blue-900 focus:outline-none rounded-lg focus:ring-1'></textarea>
                     ) : (
                         <p className='text-sm lg:text-sm text-neutral-300 dark:text-neutral-600 font-medium leading-4 tracking-wide'>
                             {bio}

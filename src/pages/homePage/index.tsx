@@ -28,10 +28,10 @@ const index = () => {
   const framer = navTabs(hookProps);
 
   return (
-    <div className="w-full flex flex-col lg:flex-row h-screen items-start bg-white md:bg-purple-700/80 md:py-3 md:px-2 gap-0 md:gap-2">
+    <div className="w-full flex flex-col md:flex-row h-screen items-start bg-white md:bg-purple-700/80 md:py-3 md:px-2 gap-0 md:gap-2">
         <Framer.Tabs {...framer.tabProps} />
         <mobFramer.Tabs {...framer.tabProps} />
-        <div className="flex w-full md:h-full md:rounded-xl shadow-none md:shadow-xl flex-col lg:flex-row items-center bg-white p-1 gap-4">
+        <div className="flex w-full h-screen md:h-full md:rounded-xl shadow-none md:shadow-xl flex-col lg:flex-row items-center bg-white p-1 gap-4">
             {framer.setSelectedTab.children}
         </div>
     </div>
