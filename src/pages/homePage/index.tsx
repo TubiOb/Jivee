@@ -10,7 +10,7 @@ import { Framer } from "../../components/framer/navFramer"
 import { mobFramer } from "../../components/framer/mobileFramer";
 import { navTabs } from "../../hooks/navUse-tabs"
 import { useState } from "react"
-import { Settings } from "..";
+import { Profile, Settings } from "..";
 
 
 const index = () => {
@@ -19,7 +19,7 @@ const index = () => {
       { id: 'chats', icon: <HiOutlineChatBubbleBottomCenterText size={18} />, label: 'Chats', children: <Inbox /> },
       { id: 'contacts', icon: <MdOutlinePeopleAlt size={18} />, label: 'Contacts', children: <Settings /> },
       { id: 'settings', icon: <RiUserSettingsLine size={18} />, label: 'Settings', children: <Settings /> },
-      { id: 'profile', icon: <RiUser3Line size={18} />, label: 'Profile', children: <Inbox /> },
+      { id: 'profile', icon: <RiUser3Line size={18} />, label: 'Profile', children: <Profile /> },
       { id: 'logout', icon: <HiLogout size={18} />, label: 'Logout', children: <Inbox /> },
     ],
     initialTabId: 'Matches',

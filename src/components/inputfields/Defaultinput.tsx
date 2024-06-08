@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { forwardRef, Ref, useState } from 'react'
 import { InputProps } from '../../interface';
 import { CiSearch } from "react-icons/ci";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -6,8 +6,8 @@ import { TfiClip } from "react-icons/tfi";
 import { MdEmojiEmotions } from "react-icons/md";
 import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text } from '@chakra-ui/react';
 
-const Defaultinput = (props: InputProps) => {
-    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, maxLength, className } = props;
+const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) => {
+    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, className, showAttachIcon } = props;
 
     const isPassword = type === 'password'; 
   
@@ -17,14 +17,15 @@ const Defaultinput = (props: InputProps) => {
         setShowPassword(!showPassword);
     };
 
-    const showTextIcons = type === 'text';
+    const showTextIcons = type === 'text' && !showAttachIcon;
 
   return (
     <Flex className='flex flex-col gap-1 overflow-hidden p-2' w={width}>
-        <InputGroup alignItems='center' display='flex'>
+        <InputGroup alignItems='center' display='flex' w='auto'>
             <ChakraInput
                 name={name}
                 value={value}
+                ref={ref}
                 onChange={onChange}
                 onFocus={onFocus}
                 color={color}
@@ -38,11 +39,11 @@ const Defaultinput = (props: InputProps) => {
                 placeholder={placeholder}
                 fontWeight={fontWeight}
                 focusBorderColor={focusBorderColor}
-                maxLength={maxLength}
                 outline='none'
+                px='3'
             />
             {isPassword && (
-                <InputRightElement>
+                <InputRightElement display='flex' h='100%' w='auto' alignItems='center'>
                     <IconButton
                         aria-label={showPassword ? "Hide password" : "Show password"}
                         icon={showPassword ? <FaEyeSlash /> : <FaEye />} 
@@ -63,7 +64,8 @@ const Defaultinput = (props: InputProps) => {
                     <InputRightElement>
                         <IconButton
                             aria-label='emoticon'
-                            icon={<MdEmojiEmotions />} 
+                            icon={<MdEmojiEmotions />}
+                            cursor='pointer'
                             // onClick={}
                             variant="ghost"
                             color="gray.500"
@@ -77,15 +79,19 @@ const Defaultinput = (props: InputProps) => {
                         />
                     </InputRightElement>
                 )}
-            {type === 'text' && !showTextIcons && (
-                <InputRightElement flexDir={'row'} gap='1'>
+            {type === 'text' && showAttachIcon && (
+                <InputRightElement display='flex' h='100%' w='auto' alignItems='center'>
                     <IconButton
                         aria-label='attach'
-                        icon={<TfiClip />} 
+                        icon={<TfiClip />}
+                        cursor='pointer'
+                        size='xs'
+                        fontSize='18px'
                         // onClick={}
                         variant="ghost"
                         color="gray.500"
                         border='0px'
+                        p='0px'
                         _hover={
                          { border: '0px',}
                         }
@@ -93,13 +99,19 @@ const Defaultinput = (props: InputProps) => {
                           { border: '0px',}
                          }
                     />
+                    {/* <AttachmentIcon cursor='pointer' /> */}
                     <IconButton
                          aria-label='emoticon'
-                         icon={<MdEmojiEmotions />} 
+                         icon={<MdEmojiEmotions />}
+                         cursor='pointer'
+                         size='xs'
+                         fontSize='18px'
                          // onClick={}
                          variant="ghost"
                          color="gray.500"
                          border='0px'
+                         p='0px'
+                         mr='2'
                          _hover={
                           { border: '0px',}
                          }
@@ -110,10 +122,11 @@ const Defaultinput = (props: InputProps) => {
                 </InputRightElement>
             )}
             {type === 'search' && ( 
-                <InputLeftElement border='0' p={0} m={0}>
+                <InputLeftElement display='flex' h='100%' w='auto' alignItems='center'>
                     <IconButton
                     aria-label='Search'
-                    icon={<CiSearch />} 
+                    icon={<CiSearch />}
+                    cursor='pointer'
                     // onClick={}
                     variant="ghost"
                     color="gray.900"
@@ -136,6 +149,6 @@ const Defaultinput = (props: InputProps) => {
         )}
     </Flex>
   )
-}
+})
 
 export default Defaultinput

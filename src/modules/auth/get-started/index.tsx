@@ -8,14 +8,22 @@ interface SetupStepPropsType {
     setupStep: any;
     details: any;
     setDetails: any;
+    confirmation: any;
+    setConfirmation: Dispatch<SetStateAction<any>>;
 }
 
 const index = ({
-    // details,
+    details,
     setupStep,
-    // setDetails,
+    // @ts-ignore
+    setDetails,
     setSetupStep,
+    // @ts-ignore
+    confirmation,
+    // @ts-ignore
+    setConfirmation,
   }: SetupStepPropsType) => {
+    console.log(details);
 
   return (
     <div className='flex bg-white w-full h-screen flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg:gap-4 px-3 py-4'>
@@ -23,7 +31,7 @@ const index = ({
             <div className="lg:hidden flex">
                 <Jivee />
             </div>
-            <div className='w-full h-[80%] lg:h-[70%]'>
+            <div className='w-full h-[69%] lg:h-[60%]'>
                 <img src={Chat} alt='Jivee chat' className=' w-full h-full' />
             </div>
         </div>
@@ -33,7 +41,7 @@ const index = ({
             </div>
             <div className='flex flex-col gap-3'>
                 <h4 className='font-semibold text-lg lg:text-xl'>Let's start the chat!</h4>
-                <p className='text-lg lg:text-xl text-neutral-500'>Connect with friends and family, securely and privately!</p>
+                <p className='text-base lg:text-xl text-neutral-500'>Connect with friends and family, securely and privately!</p>
                 <Defaultbutton type='submit' bg='purple.400' width={['100%', '80%', '80%', '80%']} mx='auto' cursor='pointer' color="white" shadow="base" fontSize={['14px', '15px', '18px']} onClick={() => setSetupStep(setupStep + 1)} >{'Get Started'}</Defaultbutton>
             </div>
            

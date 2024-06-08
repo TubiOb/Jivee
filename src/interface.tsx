@@ -20,6 +20,8 @@ export interface DefaultbuttonProps extends CBProps {
 
 export interface InputProps {
     name: string;
+    id?: string | number;
+    ref?: React.Ref<HTMLInputElement>;
     placeholder?: string;
     value: string;
     color?: string | undefined;
@@ -28,6 +30,7 @@ export interface InputProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur: (e: React.SyntheticEvent) => void;
     onFocus?: () => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     isDisabled?: boolean;
     width?: string;
     height? : string;
@@ -41,7 +44,8 @@ export interface InputProps {
     shadow?: string;
     touched?: boolean;
     focusBorderColor?: string;
-    maxLength?: number;
+    maxLength?: string | number;
+    showAttachIcon?: boolean;
 }
 
 export interface ToastProps {

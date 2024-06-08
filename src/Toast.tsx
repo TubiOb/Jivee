@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner'
-import '../index.css'
+import './index.css'
 // import { ToastProps } from './interface'
 
 const Toast = ( _showToast: any ) => {

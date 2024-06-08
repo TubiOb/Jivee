@@ -46,7 +46,7 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
                         const isActive = hoveredTabIndex === i || selectedTabIndex === i;
 
                         return (
-                            <motion.button key={i} className={`flex flex-col h-[10%] items-center gap-1 w-[54px] text-xs py-2 px-2 rounded-lg cursor-pointer outline-none font-medium z-20 ${isActive ? 'text-white bg-purple-700/80' : 'text-purple-700/80'}`} ref={(el) => (buttonRefs[i] =el)} onPointerEnter={() => {setHoveredTabIndex(i)}} onFocus={() => {setHoveredTabIndex(i)}} onClick={() => {setSelectedTab([i, i > selectedTabIndex ? i : -1])}} >
+                            <motion.button key={i} className={`flex flex-col items-center gap-1 w-[54px] text-xs py-2 px-2 rounded-lg cursor-pointer outline-none font-medium z-20 ${isActive ? 'text-white bg-purple-700/80' : 'text-purple-700/80'}`} ref={(el) => (buttonRefs[i] =el)} onPointerEnter={() => {setHoveredTabIndex(i)}} onFocus={() => {setHoveredTabIndex(i)}} onClick={() => {setSelectedTab([i, i > selectedTabIndex ? i : -1])}} >
                                 {item.icon}
                                 <span>{item.label}</span>
                             </motion.button>
