@@ -46,10 +46,11 @@ export interface InputProps {
     focusBorderColor?: string;
     maxLength?: string | number;
     showAttachIcon?: boolean;
-    emojiPickerTop?: string;
-    emojiPickerLeft?: string;
-    emojiPickert?: string;
-    emojiPickerBottom?:  string;
+    emojiPickerTop?: string[];
+    emojiPickerLeft?: string[];
+    emojiPickerRight?: string[];
+    emojiPickerBottom?:  string[];
+    emojiPickerResponsive?: boolean;
 }
 
 export interface ToastProps {
