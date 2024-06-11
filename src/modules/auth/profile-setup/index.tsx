@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { VscEdit } from "react-icons/vsc";
 import defaultUserImage from '../../../assets/defaultUser.png' 
@@ -32,7 +32,8 @@ const index = ({
     const [userImage, setUserImage] = useState(defaultUserImage);
     const [imageFile, setImageFile] = useState<File | null>(null);
 
-
+    const emojiPickerTop = useMemo(() => ['50px', '25px', '20%', '65px'], []);
+    const emojiPickerLeft = useMemo(() => ['2%', '2%', '65%', '63%'], []);
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -117,13 +118,13 @@ const index = ({
                 <div className='w-full lg:w-[35%] items-center justify-center flex p-1 relative'>
                     <img src={userImage} alt='userImage' className='rounded-full w-16 h-16 lg:w-32 lg:h-32 object-cover ring-2 ring-purple-500/80' />
                     
-                    <label htmlFor="upload" className="cursor-pointer absolute px-1 py-1 text-sm text-white lg:text-base -bottom-0 lg:-bottom-0 rounded-full bg-purple-500 z-50 shadow-sm right-[40%] md:right-[45%] lg:right-16">
+                    <label htmlFor="upload" className="cursor-pointer absolute px-1 py-1 text-sm text-white lg:text-base -bottom-0 md:bottom-1 lg:-bottom-0 rounded-full bg-purple-500 z-50 shadow-sm right-[40%] md:right-[46%] lg:right-10 xl:right-20">
                         <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" id="upload" />
                         <VscEdit />
                     </label>
                 </div>
                 <div className="block mt-6">
-                    <DefaultInput height='44px' name='username' value={details.username} type='text' shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
+                    <DefaultInput height='44px' name='username' value={details.username} type='text' showAttachIcon={false} emojiPickerResponsive={true} emojiPickerTop={emojiPickerTop} emojiPickerLeft={emojiPickerLeft} shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
                     <Defaultbutton type='submit' bg='purple.400' width={['100%', '100%', '100%', '100%']} mx='auto' cursor='pointer' color="white" shadow='lg' fontSize={['14px', '15px', '15px']} onClick={handleSave} className='mt-9' >{'Finish'}</Defaultbutton>
                 </div>
                 

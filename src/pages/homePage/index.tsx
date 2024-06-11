@@ -2,7 +2,7 @@ import { Inbox } from "../../layouts"
 import '../../index.css'
 
 import { RiUserSettingsLine, RiUser3Line } from "react-icons/ri";
-import { HiOutlineChatBubbleBottomCenterText } from "react-icons/hi2";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import { HiLogout } from "react-icons/hi";
 import { MdOutlinePeopleAlt } from "react-icons/md";
 
@@ -16,7 +16,7 @@ import { Profile, Settings } from "..";
 const index = () => {
   const [hookProps] = useState({
     tabs: [
-      { id: 'chats', icon: <HiOutlineChatBubbleBottomCenterText size={18} />, label: 'Chats', children: <Inbox /> },
+      { id: 'chats', icon: <IoChatboxEllipsesOutline size={18} />, label: 'Chats', children: <Inbox /> },
       { id: 'contacts', icon: <MdOutlinePeopleAlt size={18} />, label: 'Contacts', children: <Settings /> },
       { id: 'settings', icon: <RiUserSettingsLine size={18} />, label: 'Settings', children: <Settings /> },
       { id: 'profile', icon: <RiUser3Line size={18} />, label: 'Profile', children: <Profile /> },

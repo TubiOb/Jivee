@@ -10,13 +10,14 @@ import Picker from '@emoji-mart/react'
 
 
 const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) => {
+    // @ts-ignore
     const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, className, showAttachIcon, emojiPickerTop = [], emojiPickerLeft = [], emojiPickerRight = [], emojiPickerBottom = [], emojiPickerResponsive = false, } = props;
 
     const isPassword = type === 'password'; 
   
     const [showPassword, setShowPassword] = useState(false);
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-    const [newestValue, setNewestValue] = useState<string>(value);
+    const [newestValue, setNewestValue] = useState<string>('');
     const [cursorPosition, setCursorPosition] = useState<number | null>(null);
     const [pickerPosition, setPickerPosition] = useState({ top: emojiPickerTop[0] || '0', left: emojiPickerLeft[0] || '0', bottom: emojiPickerBottom[0] || '0', right: emojiPickerRight[0] || '0' });
 
@@ -30,35 +31,6 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
     const showTextIcons = type === 'text' && !showAttachIcon;
 
 
-
-
-    // const handleEmojiSelect = (emoji: { native: string; }) => {
-    //     console.log('HIIIIIIIIIIII')
-    //     const inputElement = (ref as React.RefObject<HTMLInputElement>)?.current;
-    //     console.log(inputElement);
-
-    //     if (inputElement) {
-    //         inputElement.focus();
-    //         const selectionStart = inputElement.selectionStart ?? 0;
-    //         const newValue = value.slice(0, selectionStart) + emoji.native + value.slice(selectionStart);
-    //         console.log(newValue);
-
-    //         if (onChange) {
-    //             const inputEvent = new Event('input', { bubbles: true }) as CustomEvent;
-    //             const target = {
-    //                 name,
-    //                 value: newValue,
-    //             };
-    //             Object.defineProperty(inputEvent, 'target', { value: target });
-    //             Object.defineProperty(inputEvent, 'currentTarget', { value: target });
-    //             onChange(inputEvent as unknown as React.ChangeEvent<HTMLInputElement>);
-    //         }
-
-    //         setCursorPosition(selectionStart + emoji.native.length);
-    //         setNewestValue(newValue);
-    //     }
-    //     setShowEmojiPicker(false);
-    // };
 
     const handleEmojiSelect = (emoji: { native: string; }) => {
         const currentRef = inputRef.current;
@@ -80,7 +52,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                 onChange(event);
             }
         }
-        setShowEmojiPicker(false);
+        // setShowEmojiPicker(false);
     };
 
 
@@ -114,36 +86,32 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
 
                 // Define breakpoints
                 const breakpoints = {
-                    xs: 0,
                     sm: 480,
                     md: 768,
                     lg: 1024,
                     xl: 1200,
-                    '2xl': 1400,
                 };
 
                 // Responsive positioning logic
-                if (windowWidth >= breakpoints['2xl']) {
-                    newTop = emojiPickerTop[5] || newTop;
-                    newLeft = emojiPickerLeft[5] || newLeft;
-                } else if (windowWidth >= breakpoints.xl) {
-                    newTop = emojiPickerTop[4] || newTop;
-                    newLeft = emojiPickerLeft[4] || newLeft;
-                } else if (windowWidth >= breakpoints.lg) {
+                 if (windowWidth >= breakpoints.xl) {
                     newTop = emojiPickerTop[3] || newTop;
                     newLeft = emojiPickerLeft[3] || newLeft;
-                } else if (windowWidth >= breakpoints.md) {
+                } else if (windowWidth >= breakpoints.lg) {
                     newTop = emojiPickerTop[2] || newTop;
                     newLeft = emojiPickerLeft[2] || newLeft;
-                } else if (windowWidth >= breakpoints.sm) {
+                } else if (windowWidth >= breakpoints.md) {
                     newTop = emojiPickerTop[1] || newTop;
                     newLeft = emojiPickerLeft[1] || newLeft;
-                } else {
+                } else if (windowWidth >= breakpoints.sm) {
                     newTop = emojiPickerTop[0] || newTop;
                     newLeft = emojiPickerLeft[0] || newLeft;
-                    newBottom = emojiPickerBottom[0] || newBottom;
-                    newRight = emojiPickerRight[0] || newRight;
-                }
+                } 
+                // else {
+                //     newTop = emojiPickerTop[0] || newTop;
+                //     newLeft = emojiPickerLeft[0] || newLeft;
+                //     newBottom = emojiPickerBottom[0] || newBottom;
+                //     newRight = emojiPickerRight[0] || newRight;
+                // }
 
                 const newPosition = { top: newTop, left: newLeft, bottom: newBottom, right: newRight };
                 
@@ -262,7 +230,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                          cursor='pointer'
                          size='xs'
                          fontSize='18px'
-                         // onClick={}
+                         onClick={(event) => { event.preventDefault(); handleEmojiPickerToggle(event); }}
                          variant="ghost"
                          color="gray.500"
                          border='0px'
@@ -304,8 +272,8 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
             </Text>
         )}
         {showEmojiPicker && (
-            <Box position='absolute' top={pickerPosition.top} left={pickerPosition.left} right={pickerPosition.right} bottom={pickerPosition.bottom} zIndex='1000'>
-                <Picker data={data} onEmojiSelect={(emoji: { native: string; }) => handleEmojiSelect(emoji)} noCountryFlags={true} emojiSize={20} skin='3' skinTonePosition='preview' emojiButtonSIze={18} maxFrequentRows={1} previewPosition='none' />
+            <Box position='absolute' w='280px' h='435px' top={pickerPosition.top} left={pickerPosition.left} right={pickerPosition.right} bottom={pickerPosition.bottom} zIndex='1000'>
+                <Picker data={data} onEmojiSelect={(emoji: { native: string; }) => handleEmojiSelect(emoji)} noCountryFlags={false} emojiSize={20} perLine='7' skin='3' skinTonePosition='preview' emojiButtonSIze={18} maxFrequentRows={1} previewPosition='none' />
             </Box>
         )}
     </Flex>
