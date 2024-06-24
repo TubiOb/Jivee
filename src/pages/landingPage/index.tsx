@@ -2,16 +2,24 @@ import { useNavigate } from 'react-router-dom';
 import '../../index.css';
 import { useEffect } from 'react';
 import { Jivee } from '../../components';
+import { auth } from '../../firebase';
 
 const index = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-          navigate('auth/signup');
-        }, 1500);
-    
-        return () => clearTimeout(timeoutId);
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          navigate('/j');
+        }
+        else {
+          const timeoutId = setTimeout(() => {
+            navigate('auth/signup');
+          }, 1500);
+      
+          return () => clearTimeout(timeoutId);
+        }
+      })
     }, [navigate]);
 
   return (

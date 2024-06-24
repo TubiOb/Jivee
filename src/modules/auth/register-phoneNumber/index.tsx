@@ -23,7 +23,6 @@ const index = ({
   confirmation,
   setConfirmation,
 }: SetupStepPropsType) => {
-  console.log(details);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 

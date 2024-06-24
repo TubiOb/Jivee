@@ -13,6 +13,7 @@ interface SetupStepPropsType {
 }
 
 const index = ({
+    // @ts-ignore
     details,
     setupStep,
     // @ts-ignore
@@ -23,7 +24,6 @@ const index = ({
     // @ts-ignore
     setConfirmation,
   }: SetupStepPropsType) => {
-    console.log(details);
 
   return (
     <div className='flex bg-white w-full h-screen flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg:gap-4 px-3 py-4'>
