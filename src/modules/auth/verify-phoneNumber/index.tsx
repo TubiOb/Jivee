@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { DefaultInput, Jivee } from '../../../components';
 import Defaultbutton from '../../../components/buttons/Defaultbutton'
 import SetupBackbutton from "../../../components/buttons/SetupBackbutton";
+import Toast from "../../../Toast";
+import { toast } from 'sonner';
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
@@ -29,7 +31,7 @@ const index = ({
     useEffect(() => {
       if (setupStep === 3) {
           inputRefs.current[0]?.focus();
-          console.log('Input refs:', inputRefs.current);
+          // console.log('Input refs:', inputRefs.current);
       }
     }, [setupStep]);
 
@@ -76,10 +78,12 @@ const index = ({
       try {
         await confirmation.confirm(otpString);
         setDetails({ ...details, otp: otpString, verified: true });
+        showToastMessage('OTP successfully verified', 'success')
         setSetupStep(setupStep + 1);
       }
       catch (err) {
-        console.error('OTP verification failed:', err);
+        // console.error('OTP verification failed:', err);
+        showToastMessage('OTP verification failed', 'error')
       }
     }
     
@@ -87,6 +91,41 @@ const index = ({
     const resendCode = () => {
       setSetupStep(setupStep - 1);
     }
+
+
+
+
+      //   CONFIGURING TOAST TO TOAST MESSAGE
+    const showToastMessage = (message: any, type: 'success' | 'error' | 'warning') => {
+      switch (type) {
+          case 'success':
+              toast.success(message, {
+                  position: 'top-right',
+                  duration: 3000,
+                  // preventDefault: true,
+              });
+              break;
+          case 'error':
+              toast.error(message, {
+                  position: 'top-right',
+                  duration: 3000,
+                  // preventDefault: true,
+              });
+              break;
+          case 'warning':
+              toast.warning(message, {
+                  position: 'top-right',
+                  duration: 3000,
+                  // preventDefault: true,
+              });
+              break;
+          default:
+              break;
+        }
+    };
+
+
+
 
   return (
     <div className="flex bg-white w-full h-screen flex-col items-center justify-start gap-10 lg:gap-4 px-3 py-4">
@@ -118,6 +157,8 @@ const index = ({
             </div>
             
         </div>
+
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }

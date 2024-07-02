@@ -2,7 +2,8 @@ import { Toaster } from 'sonner'
 import './index.css'
 // import { ToastProps } from './interface'
 
-const Toast = ( _showToast: any ) => {
+// @ts-ignore
+const Toast = ( showToast: any ) => {
 
   return (
     <div>

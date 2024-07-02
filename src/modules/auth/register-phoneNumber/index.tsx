@@ -4,6 +4,8 @@ import { DefaultInput, Jivee, PhoneInput } from '../../../components';
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from '../../../firebase';
 import '../../../index.css'
+import Toast from '../../../Toast';
+import { toast } from 'sonner';
 
 interface SetupStepPropsType {
   setSetupStep: Dispatch<SetStateAction<number>>;
@@ -44,7 +46,7 @@ const index = ({
       const confirmation = await signInWithPhoneNumber(auth, details.phoneNumber, recaptcha);
       localStorage.setItem('userPhoneNumber', details.phoneNumber);
       setConfirmation(confirmation);
-      console.log(confirmation);
+      showToastMessage('an OTP has been sent to you.', 'success')
       return confirmation;
     }
     catch (err) {
@@ -63,6 +65,7 @@ const index = ({
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(value)) {
         error = 'Please enter a valid email address.';
+        showToastMessage('Please, enter a valid email', 'error')
       }
     }
 
@@ -85,6 +88,39 @@ const index = ({
     await sendOTP();
     setSetupStep(setupStep + 1);
   };
+
+
+
+    //   CONFIGURING TOAST TO TOAST MESSAGE
+  const showToastMessage = (message: any, type: 'success' | 'error' | 'warning') => {
+  switch (type) {
+      case 'success':
+          toast.success(message, {
+              position: 'top-right',
+              duration: 3000,
+              // preventDefault: true,
+          });
+          break;
+      case 'error':
+          toast.error(message, {
+              position: 'top-right',
+              duration: 3000,
+              // preventDefault: true,
+          });
+          break;
+      case 'warning':
+          toast.warning(message, {
+              position: 'top-right',
+              duration: 3000,
+              // preventDefault: true,
+          });
+          break;
+      default:
+          break;
+    }
+  };
+
+
 
   return (
     <div className="w-full h-screen flex bg-white flex-col items-start lg:items-center lg:justify-between gap-10 lg:gap-4 px-3 py-4">
@@ -114,6 +150,8 @@ const index = ({
           </div>
           
         </div>
+
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }

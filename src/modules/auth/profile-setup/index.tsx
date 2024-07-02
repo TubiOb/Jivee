@@ -6,6 +6,8 @@ import { Defaultbutton, DefaultInput, Jivee } from "../../../components";
 import { ref, set } from "firebase/database";
 import { auth, database, storage } from "../../../firebase";
 import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+import Toast from "../../../Toast";
+import { toast } from 'sonner';
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
@@ -76,18 +78,18 @@ const index = ({
 
             if (imageFile) {
                 const imageRef = storageRef(storage, `userImages/${uid}`);
-                console.log('Retrieved ImageRef: ', imageRef)
+                // console.log('Retrieved ImageRef: ', imageRef)
                 await uploadBytes(imageRef, imageFile);
                 userImageUrl = await getDownloadURL(imageRef);
-                console.log("Uploaded image URL:", userImageUrl);
+                // console.log("Uploaded image URL:", userImageUrl);
             }
             else {
-                console.log('No image file to upload, uploading default image...');
+                // console.log('No image file to upload, uploading default image...');
                 const defaultImageBlob = await fetchDefaultImage();
                 const imageRef = storageRef(storage, `userImages/${uid}`);
                 await uploadBytes(imageRef, defaultImageBlob);
                 userImageUrl = await getDownloadURL(imageRef);
-                console.log("Uploaded default image URL:", userImageUrl);
+                // console.log("Uploaded default image URL:", userImageUrl);
             }
 
             const userDetailsRef = ref(database, `users/${uid}`);
@@ -98,7 +100,7 @@ const index = ({
                 userImage: userImageUrl,
                 verified: details.verified,
             });
-
+            showToastMessage('Sign up successful. Welcome to Jivee', 'success')
             navigate('/j');
         }
         catch (err) {
@@ -107,6 +109,41 @@ const index = ({
         
         console.log(details);
     }
+
+
+
+
+      //   CONFIGURING TOAST TO TOAST MESSAGE
+    const showToastMessage = (message: any, type: 'success' | 'error' | 'warning') => {
+    switch (type) {
+        case 'success':
+            toast.success(message, {
+                position: 'top-right',
+                duration: 3000,
+                // preventDefault: true,
+            });
+            break;
+        case 'error':
+            toast.error(message, {
+                position: 'top-right',
+                duration: 3000,
+                // preventDefault: true,
+            });
+            break;
+        case 'warning':
+            toast.warning(message, {
+                position: 'top-right',
+                duration: 3000,
+                // preventDefault: true,
+            });
+            break;
+        default:
+            break;
+        }
+    };
+
+
+
 
   return (
     <div className="flex bg-white w-full h-screen flex-col items-center justify-start lg:justify-between gap-10 lg:gap-4 px-3 py-4">
@@ -130,6 +167,8 @@ const index = ({
                 
             </div>
         </div>
+
+        <Toast showToast={showToastMessage} />
     </div>
   )
 }
