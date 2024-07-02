@@ -41,21 +41,30 @@ const index = ({
       }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-      const value = e.target.value;
-      if (/^\d$/.test(value) || value === '') {
-        const newOtp = [...otp];
-        newOtp[index] = value;
-        setOtp(newOtp);
-        setDetails({ ...details, otp: newOtp.join('') });
 
-          // Navigate to the next input field if a digit is entered
-        if (value !== '' && index < OTP_LENGTH - 1) {
-          inputRefs.current[index + 1]?.focus();
-        }
-        else if (value === '' && index > 0) {
-          inputRefs.current[index - 1]?.focus();
-        }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+      let value = e.target.value;
+      // console.log(value);
+
+      if (!/^\d$/.test(value)) {
+        // If input is not a digit, do not update state
+        return value = '';
+      }
+
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+      // console.log('New OTP is: ', newOtp);
+      // console.log('INPUT OTP: ', otp);
+      setDetails({ ...details, otp: newOtp.join('') });
+
+        // Navigate to the next input field if a digit is entered
+      if (value !== '' && index < OTP_LENGTH - 1) {
+        // console.log('Attempting to focus on:', inputRefs.current[index + 1]);
+        inputRefs.current[index + 1]?.focus();
+      }
+      else if (value === '' && index > 0) {
+        inputRefs.current[index - 1]?.focus();
       }
     };
 
@@ -63,6 +72,7 @@ const index = ({
 
     const verifyOTP = async () => {
       const otpString = otp.join("");
+      // console.log('Entered OTP:', otpString);
       try {
         await confirmation.confirm(otpString);
         setDetails({ ...details, otp: otpString, verified: true });
@@ -90,7 +100,7 @@ const index = ({
             <div className="flex flex-col items-center justify-center gap-8 py-3">
               <div className="flex flex-row w-full gap-1 md:gap-2 md:w-[85%] lg:w-[70%] xl:w-[60%] mx-auto mb-5">
                 {otp.map((digit, index) => (
-                  <DefaultInput key={index} ref={(el: HTMLInputElement | null) => (inputRefs.current[index] = el)} height='44px' name={`otp${index}`} id={`otp${index}`} value={digit} type='number' shadow='lg' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>, index)} bgColor='purple.300' onChange={(e) => handleChange(e, index)} focusBorderColor='purple.500' maxLength='1' className='flex items-center text-center focus-within:bg-white text-base' />
+                  <DefaultInput key={index} ref={(el: HTMLInputElement | null) => (inputRefs.current[index] = el)} height='44px' name={`otp${index}`} id={`otp${index}`} value={digit} type='tel' maxLength={1} shadow='lg' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>, index)} bgColor='purple.300' onChange={(e) => handleChange(e, index)} focusBorderColor='purple.500' className='flex items-center text-center focus-within:bg-white text-base' />
                 ))}
                   
                   {/* <DefaultInput height='44px' name='phoneNumber' value={details} type='number' shadow='lg' onBlur={handleBlur} bgColor='purple.300' onChange={handleChange} focusBorderColor='purple.500' maxLength='1' className='flex items-center text-center focus-within:bg-white text-base' />

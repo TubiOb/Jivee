@@ -11,7 +11,7 @@ import Picker from '@emoji-mart/react'
 
 const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) => {
     // @ts-ignore
-    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, className, showAttachIcon, emojiPickerTop = [], emojiPickerLeft = [], emojiPickerRight = [], emojiPickerBottom = [], emojiPickerResponsive = false, } = props;
+    const { color, name, value, error, onChange, onBlur, onFocus, type, isDisabled, width, height, fontWeight, errorColor, focusBorderColor, bgColor, placeholder, maxLength, className, showAttachIcon, emojiPickerTop = [], emojiPickerLeft = [], emojiPickerRight = [], emojiPickerBottom = [], emojiPickerResponsive = false, } = props;
 
     const isPassword = type === 'password'; 
   
@@ -141,6 +141,14 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
             }
         }
     }, [ref]);
+
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewestValue(e.target.value);
+        if (onChange) {
+            onChange(e);
+        }
+    };
     
 
   return (
@@ -150,7 +158,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                 name={name}
                 value={newestValue}
                 ref={inputRef}
-                onChange={(e) => setNewestValue(e.target.value)}
+                onChange={handleChange}
                 onFocus={onFocus}
                 color={color}
                 className={className}
@@ -164,6 +172,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                 fontWeight={fontWeight}
                 focusBorderColor={focusBorderColor}
                 outline='none'
+                maxLength={maxLength}
                 px='3'
             />
             {isPassword && (

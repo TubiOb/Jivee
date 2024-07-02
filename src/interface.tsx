@@ -44,7 +44,7 @@ export interface InputProps {
     shadow?: string;
     touched?: boolean;
     focusBorderColor?: string;
-    maxLength?: string | number;
+    maxLength?: number;
     showAttachIcon?: boolean;
     emojiPickerTop?: string[];
     emojiPickerLeft?: string[];

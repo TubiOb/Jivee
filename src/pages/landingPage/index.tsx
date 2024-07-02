@@ -1,20 +1,93 @@
+// import { useNavigate } from 'react-router-dom';
+// import '../../index.css';
+// import { useEffect } from 'react';
+// import { Jivee } from '../../components';
+// import { auth } from '../../firebase';
+
+// const index = () => {
+//     const navigate = useNavigate();
+    
+//     useEffect(() => {
+//       auth.onAuthStateChanged(user => {
+//         if (user) {
+//           navigate('/j');
+//         }
+//         else {
+//           const timeoutId = setTimeout(() => {
+//             navigate('/auth/signup');
+//           }, 1500);
+      
+//           return () => clearTimeout(timeoutId);
+//         }
+//       })
+//     }, [navigate]);
+
+//   return (
+//     <div className="w-full h-screen bg-purple-700/75 flex items-center justify-center">
+//         <div className="bg-white flex items-center justify-between gap-1 px-3 py-1 rounded-br-lg rounded-l-lg">
+//             <Jivee />
+//         </div>
+//     </div>
+//   )
+// }
+
+// export default index
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { useNavigate } from 'react-router-dom';
 import '../../index.css';
 import { useEffect } from 'react';
 import { Jivee } from '../../components';
-import { auth } from '../../firebase';
+import { auth, database } from '../../firebase';
+import { get, ref } from 'firebase/database';
 
 const index = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-      auth.onAuthStateChanged(user => {
+      auth.onAuthStateChanged(async user => {
         if (user) {
-          navigate('/j');
+          const userRef = ref(database, `users/${user.uid}`);
+          const userSnapshot = await get(userRef);
+
+          if (userSnapshot) {
+            const timeoutId = setTimeout(() => {
+              navigate('/j');
+            }, 1500);
+
+            return () => clearTimeout(timeoutId);
+          }
+          else {
+            const timeoutId = setTimeout(() => {
+              navigate('/auth/signup');
+            }, 1500);
+
+            return () => clearTimeout(timeoutId);
+          }
         }
         else {
           const timeoutId = setTimeout(() => {
-            navigate('auth/signup');
+            const userPhoneNumber = localStorage.getItem('userPhoneNumber');
+            if (userPhoneNumber) {
+              navigate('/auth/signin');
+            }
+            else {
+              navigate('/auth/signup');
+            }
           }, 1500);
       
           return () => clearTimeout(timeoutId);
@@ -32,6 +105,60 @@ const index = () => {
 }
 
 export default index
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { useNavigate } from 'react-router-dom';
+// import '../../index.css';
+// import { useEffect } from 'react';
+// import { Jivee } from '../../components';
+// import { auth } from '../../firebase';
+
+// const index = () => {
+//     const navigate = useNavigate();
+    
+//     useEffect(() => {
+//       const timeoutId = setTimeout(() => {
+//         const currentUser = auth.currentUser;
+//         if (currentUser) {
+//           navigate('/j');
+//         } else {
+//           auth.onAuthStateChanged(user => {
+//             if (user) {
+//               navigate('/j');
+//             } else {
+//               navigate('/auth/signup');
+//             }
+//           });
+//         }
+//       }, 1500);
+  
+//       return () => clearTimeout(timeoutId);
+//     }, [navigate]);
+
+//   return (
+//     <div className="w-full h-screen bg-purple-700/75 flex items-center justify-center">
+//         <div className="bg-white flex items-center justify-between gap-1 px-3 py-1 rounded-br-lg rounded-l-lg">
+//             <Jivee />
+//         </div>
+//     </div>
+//   )
+// }
+
+// export default index
 
 
 

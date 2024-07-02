@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { /* useEffect, */ useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import { RegisterNumber, GetStarted, VerifyNumber, ProfileSetup } from '../..';
-import { auth } from '../../../firebase';
+// import { auth } from '../../../firebase';
 
 const index = () => {
 
     const [ setupStep, setSetupStep ] = useState(1);
     const [ details, setDetails ] = useState({});
     const [confirmation, setConfirmation] = useState(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     // console.log(details);
 
-    useEffect(() => {
-        auth.onAuthStateChanged(user => {
-            if (user) {
-                navigate('/j');
-            }
-        });
-    }, [navigate]);
+    // useEffect(() => {
+    //     auth.onAuthStateChanged(user => {
+    //         if (user) {
+    //             navigate('/j');
+    //         }
+    //     });
+    // }, [navigate]);
     
 
   return (

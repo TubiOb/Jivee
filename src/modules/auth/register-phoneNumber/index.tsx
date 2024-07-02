@@ -30,10 +30,22 @@ const index = ({
 
   const sendOTP = async () => {
     try {
-      const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
+      const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {
+        'size': 'invisible', // Adjust according to your UI needs
+        'callback': (response: any) => {
+        // Handle reCAPTCHA verification successful
+        console.log('reCAPTCHA verified:', response);
+      },
+      'expired-callback': () => {
+        // Handle reCAPTCHA verification expired
+        console.log('reCAPTCHA expired');
+      },
+      });
       const confirmation = await signInWithPhoneNumber(auth, details.phoneNumber, recaptcha);
+      localStorage.setItem('userPhoneNumber', details.phoneNumber);
       setConfirmation(confirmation);
       console.log(confirmation);
+      return confirmation;
     }
     catch (err) {
 

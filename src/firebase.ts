@@ -6,13 +6,13 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged }
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBooXUmcodCYK_3rkcIlpCG8NhNDhZkEtA",
-  authDomain: "jivee-55f65.firebaseapp.com",
-  projectId: "jivee-55f65",
-  storageBucket: "jivee-55f65.appspot.com",
-  messagingSenderId: "682617877616",
-  appId: "1:682617877616:web:85f8564bfac807c663f0b5",
-  measurementId: "G-WEDKR2EBL5"
+  apiKey: "AIzaSyD_xrLN7ZNKqhP3UkYtzfvNqISzFxJBLcI",
+  authDomain: "jivee-f7043.firebaseapp.com",
+  projectId: "jivee-f7043",
+  storageBucket: "jivee-f7043.appspot.com",
+  messagingSenderId: "608660047490",
+  appId: "1:608660047490:web:5e89456a308a364eee969b",
+  measurementId: "G-D7TV7WNEMR"
 };
 
 // Initialize Firebase
