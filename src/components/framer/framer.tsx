@@ -33,7 +33,7 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
 
 
     return (
-        <div ref={tabRef} className='flex flex-shrink-0 items-center justify-center relative z-0 h-12 overflow-hidden shadow-lg bg-purple-400/50 rounded-xl py-2 px-1' onPointerLeave={(_e) => setHoveredTabIndex(null)}>
+        <div ref={tabRef} className='flex flex-shrink-0 items-center justify-center relative z-0 h-12 overflow-hidden shadow-lg bg-purple-400/50 rounded-xl py-2 px-1' onPointerLeave={(e) => setHoveredTabIndex(null)}>
             {tabs.map((item, i) => {
                 const isActive = hoveredTabIndex === i || selectedTabIndex === i;
 
@@ -51,7 +51,7 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
             </AnimatePresence>
 
             {selectedRect && tabRect && (
-                <motion.div className={`absolute inset-0 rounded-xl z-10 h-10 my-auto bg-purple-500 hover:text-white`} initial={false} animate={{ width: selectedRect.width * 1, x: `calc(${selectedRect.left - tabRect.left}px + 0%)`, opacity: 1, }} transition={transition} />
+                <motion.div className={`absolute inset-0 rounded-xl z-10 h-10 my-auto bg-purple-500 hover:text-white`} initial={false} animate={{ width: selectedRect.width, x: selectedRect.left - tabRect.left, opacity: 1, }} transition={transition} />
             )}
         </div>
     );
