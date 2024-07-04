@@ -3,7 +3,7 @@ import { Jivee } from "../../components"
 // import { motion } from "framer-motion";
 import { useTabs } from "../../hooks/use-tabs";
 import { Framer } from "../../components/framer/framer";
-import { GroupInbox, PersonalInbox } from "..";
+import { Conversations, GroupInbox, PersonalInbox } from "..";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { Box } from "@chakra-ui/react";
 
@@ -27,17 +27,23 @@ const index = () => {
     
 
   return (
-    <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] xl:w-[30%] md:shadow-xl py-2 px-3 gap-3 items-center justify-start">
-        <Jivee />
-        <div className="w-full rounded-xl overflow-hidden flex flex-col gap-2 p-2 h-screen lg:h-full">
-            <Framer.Tabs {...framer.tabProps} />
-            <Box className="relative rounded-none md:rounded-xl py-2 px-1.5 h-full">
-                {framer.setSelectedTab.children}
-                <button className='flex sticky right-[3%] ml-auto bottom-[2%] md:bottom-[2%] xl:bottom-[5%] items-center z-20 cursor-pointer px-2 py-2 group rounded-xl md:shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
+    <div className="flex flex-row w-full h-full rounded-xl gap-2 items-center justify-start">
+        <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] xl:w-[30%] md:shadow-xl py-2 px-3 gap-3 items-center justify-start">
+            <Jivee />
+            <div className="w-full relative rounded-xl overflow-hidden flex flex-col gap-2 py-2 flex-grow h-full">
+                <Framer.Tabs {...framer.tabProps} />
+                <Box className="trick rounded-none md:rounded-xl py-2 flex-grow overflow-y-scroll h-full">
+                    {framer.setSelectedTab.children}
+                    
+                </Box>
+                <button className='flex fixed self-end mr-3 mb-5 bottom-[6%] md:bottom-[8%] xl:bottom-[5%] items-center z-20 cursor-pointer px-2 py-2 group rounded-xl md:shadow-lg outline-none border-none bg-purple-600 dark:bg-purple-600 dark:hover:bg-white gap-1 hover:bg-white text-white dark:hover:text-purple-600 dark:text-white hover:text-purple-600'>
                     <BiSolidMessageSquareAdd size={20} /> 
                 </button>
-            </Box>
+            </div>
         </div>
+        <Box className="flex-1 h-full rounded-r-xl" w='calc(100% - (54px + 30%))'>
+            <Conversations />
+        </Box>
     </div>
   )
 }

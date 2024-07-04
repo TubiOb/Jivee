@@ -39,7 +39,7 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
             <div className={`rounded-xl text-purple-700/80 w-14 items-center justify-center flex-shrink-0 flex flex-col shadow-xl h-full transition-all duration-500 ease-in-out`}>
                
                 
-                <motion.div ref={navRef} transition={{ type: 'spring', ease: 'easeInOut', duration: 0.40 }} className={`rounded-xl shadow-2xl flex flex-col bg-white items-center justify-start py-4 px-1 gap-4 h-full w-14`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
+                <motion.div ref={navRef} transition={{ type: 'spring', ease: 'easeInOut', duration: 0.40 }} className={`rounded-xl relative shadow-2xl flex flex-col bg-white items-center justify-start py-4 px-1 gap-6 h-full w-14`} onPointerLeave={(_e) => setHoveredTabIndex(null)}>
                     {/* Add your sidebar content here */}
                     {/* You can use conditional rendering to show/hide sidebar items */}
                     {tabs.map((item, i) => {
@@ -55,12 +55,12 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab }: Props): JSX.Element =>
 
                     <AnimatePresence>
                         {hoveredRect && navRect && (
-                            <motion.div key={'hover'} className="absolute h-[10%] rounded-lg p-1 bg-transparent" initial={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} animate={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} exit={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} transition={transition} />
+                            <motion.div key={'hover'} className="absolute top-0 rounded-lg p-1 bg-transparent" initial={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} animate={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} exit={{ x: hoveredRect.left - navRect.left, y: hoveredRect.top - navRect.top, width: hoveredRect.width, height: hoveredRect.height, opacity: 1, }} transition={transition} />
                         )}
                     </AnimatePresence>
 
                 {selectedRect && navRect && (
-                    <motion.div className={`absolute rounded-lg z-10 h-[8%] my-auto bg-transparent hover:text-white`} initial={false} animate={{ width: selectedRect.width * 1, x: `calc(${selectedRect.left - navRect.left}px + 0%)`, y: `calc(${selectedRect.top - navRect.top}px + 0%)`, opacity: 1, }} transition={transition} />
+                    <motion.div className={`absolute top-0 rounded-lg bg-transparent hover:text-white`} initial={false} animate={{ width: selectedRect.width, x: selectedRect.left - navRect.left, y: selectedRect.top - navRect.top, opacity: 1, }} transition={transition} />
                 )}
                 </motion.div>
             </div>
