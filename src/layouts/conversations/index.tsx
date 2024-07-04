@@ -11,6 +11,7 @@ const index = () => {
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // Do something when the input value changes
+        console.log(e)
     };
 
   return (
