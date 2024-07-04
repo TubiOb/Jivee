@@ -4,7 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { TfiClip } from "react-icons/tfi";
 import { MdEmojiEmotions } from "react-icons/md";
-import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text, Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text, Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
@@ -218,49 +218,24 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
             {type === 'text' && showAttachIcon && (
                 <InputRightElement display='flex' h='100%' w='auto' px='0.5' gap='2' mr='2' alignItems='center'>
                     {/* <IconButton
-                        
+                        aria-label='attach'
+                        icon={<TfiClip />}
+                        cursor='pointer'
+                        size='xs'
+                        fontSize='18px'
+                        // onClick={}
+                        variant="ghost"
+                        color="purple.300"
+                        border='0px'
+                        p='0px'
+                        _hover={
+                         { border: '0px',}
+                        }
+                        _active={
+                          { border: '0px',}
+                         }
                     /> */}
-
-                    <Menu>
-                        <MenuButton as={IconButton} 
-                            aria-label='attach'
-                            icon={<TfiClip />}
-                            cursor='pointer'
-                            size='xs'
-                            fontSize='18px'
-                            // onClick={}
-                            variant="ghost"
-                            color="purple.300"
-                            border='0px'
-                            p='0px'
-                            _hover={
-                            { border: '0px',}
-                            }
-                            _active={
-                            { border: '0px',}
-                            }
-                        />
-                        <MenuList border='none' shadow='md' bg='white' pos='absolute' bottom='50%' right='50%' zIndex='100000' display='grid' gap='5' px='2' gridTemplateColumns='repeat(3, 1fr)' gridTemplateRows='repeat(2, 1fr)'>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                            <MenuItem display='flex' flexDirection='column' w='max-content' fontSize='smaller' icon={<TfiClip />}>
-                            Open Tab
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
+                    {/*  */}
                     {/* <AttachmentIcon cursor='pointer' /> */}
                     <IconButton
                          aria-label='emoticon'
