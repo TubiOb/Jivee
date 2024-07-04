@@ -30,7 +30,7 @@ const index = () => {
             <Stack direction='row' alignItems='center' spacing='0'>
                 <Menu>
                     <MenuButton as={IconButton} 
-                        aria-label='attach'
+                        aria-label='Attach file'
                         icon={<TfiClip />}
                         cursor='pointer'
                         size='xs'
@@ -50,7 +50,7 @@ const index = () => {
                         { }
                         }
                     />
-                    <MenuList border='none' shadow='md' bg='white' bottom='200%' zIndex='1000' display='grid' gap='5' py='4' px='2' gridTemplateColumns='repeat(3, 1fr)' gridTemplateRows='repeat(2, 1fr)'>
+                    <MenuList border='none' shadow='md' bg='white' top='200%' zIndex='1000' display='grid' gap='5' py='4' px='2' gridTemplateColumns='repeat(3, 1fr)' gridTemplateRows='repeat(2, 1fr)'>
                         <MenuItem display='flex' flexDirection='column' gap='3' w='max-content' fontSize='smaller' icon={<TfiClip  size='18'/>}>
                         Open Tab
                         </MenuItem>

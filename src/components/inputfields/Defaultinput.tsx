@@ -2,9 +2,8 @@ import { forwardRef, Ref, useEffect, useRef, useState } from 'react'
 import { InputProps } from '../../interface';
 import { CiSearch } from "react-icons/ci";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { TfiClip } from "react-icons/tfi";
 import { MdEmojiEmotions } from "react-icons/md";
-import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text, Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Flex, Input as ChakraInput, InputGroup, InputRightElement, IconButton, InputLeftElement, Text, Box } from '@chakra-ui/react';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
