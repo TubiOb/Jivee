@@ -94,3 +94,10 @@ body {
   animation: ripple 1s infinite;
   pointer-events: none;
 }
+
+
+
+/* MENU LIST SETTING */
+.menu-list {
+  width: 80px !important;
+}
