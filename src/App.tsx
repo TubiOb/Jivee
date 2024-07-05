@@ -5,6 +5,7 @@ import theme from "./theme/theme";
 import './index.css'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import { AppProvider } from './components/management/appState';
 
 function App() {
   onAuthStateChanged(auth, (user) => {
@@ -17,7 +18,9 @@ function App() {
 
   return (
       <ChakraProvider theme={theme}>
-        <RouterProvider router={router}></RouterProvider>
+        <AppProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </AppProvider>
       </ChakraProvider>
   )
 }

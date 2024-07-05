@@ -1,12 +1,6 @@
 import { AbsoluteCenter, Box, Divider, IconButton, Link, Menu, MenuButton, MenuItem, MenuList, Stack, Text } from "@chakra-ui/react";
 import { CiImageOn, CiMenuKebab } from "react-icons/ci";
-import { FaImages } from "react-icons/fa";
 import { HiOutlineDownload } from "react-icons/hi";
-import { HiUserPlus } from "react-icons/hi2";
-import { IoDocumentText } from "react-icons/io5";
-import { MdLibraryMusic } from "react-icons/md";
-import { PiPaperclipBold } from "react-icons/pi";
-import { TbCameraFilled } from "react-icons/tb";
 
 
 const Timeline = ({el}: any) => {
@@ -24,12 +18,14 @@ const Timeline = ({el}: any) => {
 const TextMsg = ({el}: any) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
+            {!el.incoming && <MessageOptions />}
+            <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content' overflow='hidden'>
+
                 <Text className="text-sm" color={el.incoming ? 'purple.400' : 'white'}>
                     {el.message}
                 </Text>
             </Box>
-            <MessageOptions />
+            {el.incoming && <MessageOptions />}
         </Stack>
     )
 }
@@ -38,6 +34,7 @@ const TextMsg = ({el}: any) => {
 const MediaMsg = ({el}: any) => {
     return (
         <Stack zIndex='10' direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
+            {!el.incoming && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='1'>
                     <img src={el.img} alt={el.message} className="max-h-36 rounded-md" />
@@ -46,6 +43,7 @@ const MediaMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
+            {el.incoming && <MessageOptions />}
         </Stack>
     )
 }
@@ -54,6 +52,7 @@ const MediaMsg = ({el}: any) => {
 const ReplyMsg = ({el}: any) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
+            {!el.incoming && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack p={2} direction='column' bg='white' spacing='3' alignItems='center' borderRadius='md'>
@@ -66,6 +65,7 @@ const ReplyMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
+            {el.incoming && <MessageOptions />}
         </Stack>
     )
 }
@@ -74,6 +74,7 @@ const ReplyMsg = ({el}: any) => {
 const LinkMsg = ({el}: any) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
+            {!el.incoming && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack p={1} spacing={2} bg='gray.100'>
@@ -92,6 +93,7 @@ const LinkMsg = ({el}: any) => {
                     </Stack>
                 </Stack>
             </Box>
+            {el.incoming && <MessageOptions />}
         </Stack>
     )
 }
@@ -100,6 +102,7 @@ const LinkMsg = ({el}: any) => {
 const DocMsg = ({el}: any) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
+            {!el.incoming && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack direction='row' spacing='3' alignItems='center' bg='white' borderRadius='md'>
@@ -114,6 +117,7 @@ const DocMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
+            {el.incoming && <MessageOptions />}
         </Stack>
     )
 }
@@ -122,7 +126,7 @@ const DocMsg = ({el}: any) => {
 const MessageOptions = () => {
     return (
         <>
-            <Menu matchWidth>
+            <Menu autoSelect={false} flip={true} matchWidth={true}>
                 <MenuButton as={IconButton} 
                     aria-label='Chat Option'
                     cursor='pointer'
@@ -141,20 +145,20 @@ const MessageOptions = () => {
                     }
                 />
                 <MenuList w='20px' className="menu-list" border='none' display='flex' flexDirection='column' shadow='md' bg='white' zIndex='1000' gap='2' py='3' px='2'>
-                    <MenuItem w='4.375rem' color='purple.400' py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Contacts
+                    <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
+                        Reply
                     </MenuItem>
-                    <MenuItem w='3.75rem' color='purple.400' py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Gallery
+                    <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
+                        React to message
                     </MenuItem>
-                    <MenuItem w='5rem' color='purple.400' py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Document
+                    <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
+                        Forward message
                     </MenuItem>
-                    <MenuItem w='3.3125rem' color='purple.400' py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Audio
+                    <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
+                        Star message
                     </MenuItem>
-                    <MenuItem w='4.0625rem' color='purple.400' py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Camera
+                    <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
+                        Delete message
                     </MenuItem>
                 </MenuList>
             </Menu>

@@ -89,21 +89,35 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
                     md: 768,
                     lg: 1024,
                     xl: 1200,
+                    '2xl': 1500,
                 };
 
                 // Responsive positioning logic
-                 if (windowWidth >= breakpoints.xl) {
+                if (windowWidth >= breakpoints['2xl']) {
+                    newTop = emojiPickerTop[4] || newTop;
+                    newLeft = emojiPickerLeft[4] || newLeft;
+                    newBottom = emojiPickerBottom[4] || newBottom;
+                    newRight = emojiPickerRight[4] || newRight;
+                } else if (windowWidth >= breakpoints.xl) {
                     newTop = emojiPickerTop[3] || newTop;
                     newLeft = emojiPickerLeft[3] || newLeft;
+                    newBottom = emojiPickerBottom[3] || newBottom;
+                    newRight = emojiPickerRight[3] || newRight;
                 } else if (windowWidth >= breakpoints.lg) {
                     newTop = emojiPickerTop[2] || newTop;
                     newLeft = emojiPickerLeft[2] || newLeft;
+                    newBottom = emojiPickerBottom[2] || newBottom;
+                    newRight = emojiPickerRight[2] || newRight;
                 } else if (windowWidth >= breakpoints.md) {
                     newTop = emojiPickerTop[1] || newTop;
                     newLeft = emojiPickerLeft[1] || newLeft;
+                    newBottom = emojiPickerBottom[1] || newBottom;
+                    newRight = emojiPickerRight[1] || newRight;
                 } else if (windowWidth >= breakpoints.sm) {
                     newTop = emojiPickerTop[0] || newTop;
                     newLeft = emojiPickerLeft[0] || newLeft;
+                    newBottom = emojiPickerBottom[0] || newBottom;
+                    newRight = emojiPickerRight[0] || newRight;
                 } 
                 // else {
                 //     newTop = emojiPickerTop[0] || newTop;
@@ -283,7 +297,7 @@ const Defaultinput = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>) 
             </Text>
         )}
         {showEmojiPicker && (
-            <Box position='absolute' w='280px' h='435px' top={pickerPosition.top} left={pickerPosition.left} right={pickerPosition.right} bottom={pickerPosition.bottom} zIndex='1000'>
+            <Box position='fixed' w='280px' h='435px' top={pickerPosition.top} left={pickerPosition.left} right={pickerPosition.right} bottom={pickerPosition.bottom} zIndex='1000'>
                 <Picker data={data} onEmojiSelect={(emoji: { native: string; }) => handleEmojiSelect(emoji)} noCountryFlags={false} emojiSize={20} perLine='7' skin='3' skinTonePosition='preview' emojiButtonSIze={18} maxFrequentRows={1} previewPosition='none' />
             </Box>
         )}

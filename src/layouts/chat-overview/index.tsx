@@ -1,16 +1,15 @@
 import { useState } from "react";
-import { Jivee } from "../../components"
+import { Jivee, useApi } from "../../components"
 // import { motion } from "framer-motion";
 import { useTabs } from "../../hooks/use-tabs";
 import { Framer } from "../../components/framer/framer";
-import { Conversations, GroupInbox, PersonalInbox } from "..";
+import { Contact, Conversations, GroupInbox, PersonalInbox } from "..";
 import { BiSolidMessageSquareAdd } from "react-icons/bi";
 import { Box } from "@chakra-ui/react";
 
 
-
 const index = () => {
-    
+    const { state } = useApi();
 
     const [hookProps] = useState({ 
         tabs: [
@@ -21,14 +20,11 @@ const index = () => {
     });
 
     const framer = useTabs(hookProps);
-
-    
-
     
 
   return (
     <div className="flex flex-row w-full h-full rounded-xl gap-2 items-center justify-start">
-        <div className="flex flex-col rounded-xl w-full h-full lg:w-[40%] xl:w-[30%] md:shadow-xl py-2 px-3 gap-3 items-center justify-start">
+        <div className="hidden lg:flex flex-col rounded-xl w-full h-full lg:w-[40%] xl:w-[30%] md:shadow-xl py-2 px-3 gap-3 items-center justify-start">
             <Jivee />
             <div className="w-full relative rounded-xl overflow-hidden flex flex-col gap-2 py-2 flex-grow h-full">
                 <Framer.Tabs {...framer.tabProps} />
@@ -41,9 +37,11 @@ const index = () => {
                 </button>
             </div>
         </div>
-        <Box className="flex-1 h-full rounded-r-xl" w='calc(100% - (54px + 30%))'>
+        <Box className="flex-1 h-full rounded-r-xl" width={state.sideBar.open ? 'calc(100% - (23.375rem + 30%))' : 'calc(100% - (3.375rem + 30%))'}>
             <Conversations />
         </Box>
+
+        {state.sideBar.open && <Contact />}
     </div>
   )
 }
