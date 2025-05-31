@@ -97,9 +97,9 @@ const index = () => {
 
   return (
     <div className="w-full h-screen bg-purple-700/75 flex items-center justify-center">
-        <div className="bg-white flex items-center justify-between gap-1 px-3 py-1 rounded-br-lg rounded-l-lg">
-            <Jivee />
-        </div>
+      <div className="bg-white flex items-center justify-between gap-1 px-3 py-1 rounded-br-lg rounded-l-lg">
+        <Jivee />
+      </div>
     </div>
   )
 }

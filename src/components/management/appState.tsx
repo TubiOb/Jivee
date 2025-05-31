@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer, ReactNode } from 'react';
 
 // Define types
 interface AppState {
+  selectedChat: boolean | undefined;
   user: {};
   sideBar: {
     open: boolean;
@@ -55,6 +56,7 @@ const initialState: AppState = {
   chat_type: null,
   room_id: null,
   call_logs: [],
+  selectedChat: undefined
 };
 
 const AppContext = createContext<{ state: AppState; dispatch: React.Dispatch<AppAction> } | undefined>(undefined);

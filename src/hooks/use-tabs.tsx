@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 
 export type Tab = { label: string; id: string; children: ReactNode };
 
@@ -11,10 +11,16 @@ export function useTabs({
     initialTabId: string;
     onChange?: (id: string) => void;
 }) {
-    const [[ selectedTabIndex, direction ], setSelectedTab] = useState(() => {
+    const [[ selectedTabIndex, direction ], setState] = useState(() => {
         const indexOfInitialTab = tabs.findIndex((tab) => tab.id === initialTabId);
         return [ indexOfInitialTab === -1 ? 0 : indexOfInitialTab, 0];
     })
+
+    const setSelectedTab = useCallback((input: [number, number]) => {
+        const [newIndex, newDirection] = input;
+        setState([newIndex, newDirection]);
+        onChange?.(tabs[newIndex]?.id);
+    }, [onChange, tabs]);
 
     return {
         tabProps: {

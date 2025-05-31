@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
-    setupStep: any;
+    setupStep: number;
     details: any;
     setDetails: any;
     confirmation: any;

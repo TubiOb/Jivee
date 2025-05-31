@@ -10,23 +10,23 @@ const index = () => {
            {Chat_History.map((el) => {
             switch (el.type) {
                 case 'divider':
-                    return <Timeline el={el} />;
+                    return <Timeline key={`timeline-${el.id || el.text}`} el={el} />;
                 case 'msg':
                     switch (el.subtype) {
                         case 'img':
-                            return <MediaMsg el={el} />;
+                            return <MediaMsg key={`media-${el.id || el.message}`} el={el} />;
                         case 'doc':
-                            return <DocMsg el={el} />;
+                            return <DocMsg key={`doc-${el.id || el.message}`} el={el} />;
                         case 'link':
-                            return <LinkMsg el={el} />;
+                            return <LinkMsg key={`link-${el.id || el.message}`} el={el} />;
                         case 'reply':
-                            return <ReplyMsg el={el} />;
+                            return <ReplyMsg key={`reply-${el.id || el.message}`} el={el} />;
                         default:
-                            return <TextMsg el={el} />;
+                            return <TextMsg key={`text-${el.id || el.message}`} el={el} />;
                     }
                     break;
                 default:
-                    return <></>
+                    return null;
             }
            })} 
         </Stack>

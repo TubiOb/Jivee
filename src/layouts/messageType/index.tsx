@@ -152,13 +152,13 @@ const MessageOptions = () => {
                         React to message
                     </MenuItem>
                     <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Forward message
+                        Forward
                     </MenuItem>
                     <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Star message
+                        Star
                     </MenuItem>
                     <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
-                        Delete message
+                        Delete
                     </MenuItem>
                 </MenuList>
             </Menu>
