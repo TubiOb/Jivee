@@ -25,7 +25,9 @@ const Tabs = ({ tabs, selectedTabIndex, setSelectedTab, onProfileClick, onLogout
     const [ toggle, setToggle ] = useState(false);
 
     const [buttonRefs, setButtonRefs] = useState<Array<HTMLButtonElement | null>>([],);
+    // @ts-ignore
     const [userAvatar, setUserAvatar] = useState("")
+    // @ts-ignore
     const [userName, setUserName] = useState("User")
 
     useEffect(() => {

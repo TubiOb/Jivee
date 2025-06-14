@@ -20,7 +20,7 @@ const EmojiPicker = ({ isOpen, onClose, onEmojiSelect, triggerRef }: EmojiPicker
 
     const triggerRect = triggerRef.current.getBoundingClientRect()
     const viewportWidth = window.innerWidth
-    const viewportHeight = window.innerHeight
+    // const viewportHeight = window.innerHeight
 
     // Emoji picker dimensions
     const pickerWidth = 352
