@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { J, Jivee } from './pages'
+import { Calls, J, Jivee } from './pages'
 import { ForgotPassword, SignIn, SignUp } from './modules'
 
 const router = createBrowserRouter ([
@@ -35,6 +35,10 @@ const router = createBrowserRouter ([
     {
         path: 'j',
         element: <J />,
+    },
+    {
+        path: 'calls',
+        element: <Calls />
     }
     
 ])

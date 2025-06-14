@@ -172,7 +172,7 @@ const Conversations = () => {
 
       {/* Messages Area */}
       <Box flex="1" overflowY="auto" css={{ "&::-webkit-scrollbar": { width: "6px", }, "&::-webkit-scrollbar-track": { background: "transparent", }, "&::-webkit-scrollbar-thumb": { background: "#E2E8F0", borderRadius: "3px", }, }} >
-        <Messages />
+        <Messages menu={true} />
       </Box>
 
       {/* Input Area */}

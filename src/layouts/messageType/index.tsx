@@ -15,26 +15,26 @@ const Timeline = ({el}: any) => {
 }
 
 
-const TextMsg = ({el}: any) => {
+const TextMsg = ({ el, menu }: { el: any; menu: boolean }) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            {!el.incoming && <MessageOptions />}
+            {!el.incoming && menu && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content' overflow='hidden'>
 
                 <Text className="text-sm" color={el.incoming ? 'purple.400' : 'white'}>
                     {el.message}
                 </Text>
             </Box>
-            {el.incoming && <MessageOptions />}
+            {el.incoming && menu && <MessageOptions />}
         </Stack>
     )
 }
 
 
-const MediaMsg = ({el}: any) => {
+const MediaMsg = ({ el, menu }: { el: any; menu: boolean }) => {
     return (
         <Stack zIndex='10' direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            {!el.incoming && <MessageOptions />}
+            {!el.incoming && menu && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='1'>
                     <img src={el.img} alt={el.message} className="max-h-36 rounded-md" />
@@ -43,16 +43,16 @@ const MediaMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
-            {el.incoming && <MessageOptions />}
+            {el.incoming && menu && <MessageOptions />}
         </Stack>
     )
 }
 
 
-const ReplyMsg = ({el}: any) => {
+const ReplyMsg = ({ el, menu }: { el: any; menu: boolean }) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            {!el.incoming && <MessageOptions />}
+            {!el.incoming && menu && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack p={2} direction='column' bg='white' spacing='3' alignItems='center' borderRadius='md'>
@@ -65,16 +65,16 @@ const ReplyMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
-            {el.incoming && <MessageOptions />}
+            {el.incoming && menu && <MessageOptions />}
         </Stack>
     )
 }
 
 
-const LinkMsg = ({el}: any) => {
+const LinkMsg = ({ el, menu }: { el: any; menu: boolean }) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            {!el.incoming && <MessageOptions />}
+            {!el.incoming && menu && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack p={1} spacing={2} bg='gray.100'>
@@ -93,16 +93,16 @@ const LinkMsg = ({el}: any) => {
                     </Stack>
                 </Stack>
             </Box>
-            {el.incoming && <MessageOptions />}
+            {el.incoming && menu && <MessageOptions />}
         </Stack>
     )
 }
 
 
-const DocMsg = ({el}: any) => {
+const DocMsg = ({ el, menu }: { el: any; menu: boolean }) => {
     return (
         <Stack direction='row' justifyContent={el.incoming ? 'start' : 'end'}>
-            {!el.incoming && <MessageOptions />}
+            {!el.incoming && menu && <MessageOptions />}
             <Box p={1.5} bg={el.incoming ? 'gray.100' : 'purple.400'} borderRadius='lg' shadow='md' w='max-content'>
                 <Stack spacing='2'>
                     <Stack direction='row' spacing='3' alignItems='center' bg='white' borderRadius='md'>
@@ -117,7 +117,7 @@ const DocMsg = ({el}: any) => {
                     </Text>
                 </Stack>
             </Box>
-            {el.incoming && <MessageOptions />}
+            {el.incoming && menu && <MessageOptions />}
         </Stack>
     )
 }
@@ -127,23 +127,7 @@ const MessageOptions = () => {
     return (
         <>
             <Menu autoSelect={false} flip={true} matchWidth={true}>
-                <MenuButton as={IconButton} 
-                    aria-label='Chat Option'
-                    cursor='pointer'
-                    icon={<CiMenuKebab size={15} />}
-                    size='xs'
-                    fontSize='20px'
-                    // onClick={}
-                    variant='ghost'
-                    // color="purple.300"
-                    className="flex items-center justify-center"
-                    _hover={
-                    { }
-                    }
-                    _active={
-                    { }
-                    }
-                />
+                <MenuButton as={IconButton} aria-label='Chat Option' cursor='pointer' icon={<CiMenuKebab size={15} />} size='xs' fontSize='20px' variant='ghost' className="flex items-center justify-center" _hover={ { } } _active={ { } } />
                 <MenuList w='20px' className="menu-list" border='none' display='flex' flexDirection='column' shadow='md' bg='white' zIndex='1000' gap='2' py='3' px='2'>
                     <MenuItem color='purple.400' _hover={{ boxShadow: 'gray.100' }} _focusWithin={{ bg: 'gray.100', }}  py='1' px='2' borderRadius='lg' fontSize='smaller'>
                         Reply

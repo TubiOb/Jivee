@@ -1,7 +1,10 @@
 import { Jivee } from '../../../components';
 import Chat from '../../../assets/Group Chat-bro.svg' 
 import Defaultbutton from '../../../components/buttons/Defaultbutton'
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
@@ -24,6 +27,16 @@ const index = ({
     // @ts-ignore
     setConfirmation,
   }: SetupStepPropsType) => {
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            navigate('/j');
+        }
+        });
+        return () => unsubscribe();
+    }, [navigate]);
 
   return (
     <div className='flex bg-white w-full h-screen flex-col lg:flex-row items-center justify-center lg:justify-between gap-10 lg:gap-4 px-3 py-4'>

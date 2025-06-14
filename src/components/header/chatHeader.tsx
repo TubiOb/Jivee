@@ -19,7 +19,7 @@ const chatHeader = () => {
                     </IconButton>
                 </Box> */}
                 <Box>
-                    <Avatar name="" className="inline-block rounded-full ring-1 ring-white cursor-pointer" size={['sm', 'md']} src={faker.image.avatar()}>
+                    <Avatar name={faker.person.fullName()} className="inline-block rounded-full ring-1 ring-white cursor-pointer" size={['sm', 'md']} src={faker.image.avatar()}>
                         <AvatarBadge boxSize='.85rem' className='bg-purple-500/90 avatar-badge-ripple' />
                     </Avatar>
                 </Box>

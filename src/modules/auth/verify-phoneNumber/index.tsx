@@ -4,6 +4,7 @@ import Defaultbutton from '../../../components/buttons/Defaultbutton'
 import SetupBackbutton from "../../../components/buttons/SetupBackbutton";
 import Toast from "../../../Toast";
 import { toast } from 'sonner';
+import useCountdown from "../../../hooks/countdown";
 
 interface SetupStepPropsType {
     setSetupStep: Dispatch<SetStateAction<number>>;
@@ -27,6 +28,7 @@ const index = ({
   }: SetupStepPropsType) => {
     const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(''));
     const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(OTP_LENGTH).fill(null));
+    const { timeLeft, isActive, startCountdown } = useCountdown(60);
 
     useEffect(() => {
       if (setupStep === 3) {
@@ -35,6 +37,9 @@ const index = ({
       }
     }, [setupStep]);
 
+    useEffect(() => {
+      startCountdown();
+    }, []);
     
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
       const value = e.target.value;
@@ -46,10 +51,8 @@ const index = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       let value = e.target.value;
-      // console.log(value);
 
       if (!/^\d$/.test(value)) {
-        // If input is not a digit, do not update state
         return value = '';
       }
 
@@ -60,9 +63,7 @@ const index = ({
       // console.log('INPUT OTP: ', otp);
       setDetails({ ...details, otp: newOtp.join('') });
 
-        // Navigate to the next input field if a digit is entered
       if (value !== '' && index < OTP_LENGTH - 1) {
-        // console.log('Attempting to focus on:', inputRefs.current[index + 1]);
         inputRefs.current[index + 1]?.focus();
       }
       else if (value === '' && index > 0) {
@@ -93,8 +94,6 @@ const index = ({
     }
 
 
-
-
       //   CONFIGURING TOAST TO TOAST MESSAGE
     const showToastMessage = (message: any, type: 'success' | 'error' | 'warning') => {
       switch (type) {
@@ -102,21 +101,18 @@ const index = ({
               toast.success(message, {
                   position: 'top-right',
                   duration: 3000,
-                  // preventDefault: true,
               });
               break;
           case 'error':
               toast.error(message, {
                   position: 'top-right',
                   duration: 3000,
-                  // preventDefault: true,
               });
               break;
           case 'warning':
               toast.warning(message, {
                   position: 'top-right',
                   duration: 3000,
-                  // preventDefault: true,
               });
               break;
           default:
@@ -148,7 +144,13 @@ const index = ({
               </div>
               <div className="flex flex-col items-center justify-center gap-2">
                 <h5 className='text-sm lg:text-base font-medium tracking-wide'>Didn't get OTP Code</h5>
-                <button type="submit" className="text-purple-700 text-sm font-semibold" onClick={resendCode}>Resend Code</button>
+                {isActive ? (
+                  <span className="text-sm text-gray-500">
+                    Resend OTP in {timeLeft} seconds
+                  </span>
+                ) : (
+                  <button type="submit" className="text-purple-700 text-sm font-semibold" onClick={resendCode} disabled={isActive}>Resend Code</button>
+                )}
               </div>
 
               <div className="w-[80%] md:w-[75%] lg:w-[60%] xl:w-[50%] mx-auto">

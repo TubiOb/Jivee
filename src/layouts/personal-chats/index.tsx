@@ -146,6 +146,7 @@ const index = () => {
     //       <BiSolidMessageSquareAdd size={20} /> 
     //   </button> */}
     // </div>
+    
     <VStack spacing={3} w="100%" h="100%" align="stretch">
       {/* Search Bar */}
       <Box mt={1} px={1}>

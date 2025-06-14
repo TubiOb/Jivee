@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { VscEdit } from "react-icons/vsc";
 import defaultUserImage from '../../../assets/defaultUser.png' 
@@ -33,9 +33,6 @@ const index = ({
     const navigate = useNavigate();
     const [userImage, setUserImage] = useState(defaultUserImage);
     const [imageFile, setImageFile] = useState<File | null>(null);
-
-    const emojiPickerTop = useMemo(() => ['50px', '25px', '20%', '65px'], []);
-    const emojiPickerLeft = useMemo(() => ['2%', '2%', '65%', '63%'], []);
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -161,7 +158,7 @@ const index = ({
                     </label>
                 </div>
                 <div className="block mt-6">
-                    <DefaultInput height='44px' name='username' value={details.username} type='text' showAttachIcon={false} emojiPickerResponsive={true} emojiPickerTop={emojiPickerTop} emojiPickerLeft={emojiPickerLeft} shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
+                    <DefaultInput height='44px' name='username' value={details.username} type='text' showAttachIcon={false} shadow='md' onBlur={(e) => handleBlur(e as React.FocusEvent<HTMLInputElement>)} bgColor='purple.100' onChange={handleChange} focusBorderColor='purple.500' className='flex items-center focus-within:bg-white text-base' />
                     <Defaultbutton type='submit' bg='purple.400' width={['100%', '100%', '100%', '100%']} mx='auto' cursor='pointer' color="white" shadow='lg' fontSize={['14px', '15px', '15px']} onClick={handleSave} className='mt-9' >{'Finish'}</Defaultbutton>
                 </div>
                 

@@ -25,13 +25,4 @@ const GoogleUser = new GoogleAuthProvider();
 const FacebookUser = new FacebookAuthProvider();
 const database = getDatabase(app);
 
-// Listen for changes in authentication state
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log('User is logged in');
-    } else {
-      console.log('User is logged out');
-    }
-});
-
 export { app, analytics, auth, firestore, storage, onAuthStateChanged, GoogleUser, FacebookUser, database };

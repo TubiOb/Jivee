@@ -23,7 +23,7 @@ const PhoneSignIn = ({ value, onValueChange }: { value: string, onValueChange: (
 
   return (
     <div className="h-[44px] w-[95%] mx-auto flex items-center justify-center peer-focus-within:border-purple-500 rounded-md">
-        <PhoneInput country="ng" onChange={setInternalValue} value={internalvalue} inputStyle={{ background: '#e0aaff', color: '#240046', width: '100%', margin: 'auto', height: '44px', border: 'purple.500', borderRadius: '8px' }} />
+      <PhoneInput country="ng" onChange={setInternalValue} value={internalvalue} inputStyle={{ background: '#e0aaff', color: '#240046', width: '100%', margin: 'auto', height: '44px', border: 'purple.500', borderRadius: '8px' }} />
     </div>
   )
 }
